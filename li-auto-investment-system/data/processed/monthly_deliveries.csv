@@ -1,0 +1,9 @@
+company,ticker,month,deliveries,source,date,verification,freshness,note
+Li Auto,LI,2026-01,27668,https://ir.lixiang.com/news-releases/news-release-details/li-auto-inc-january-2026-delivery-update/,2026-02-01,已核实,最新,公司月度交付公告
+Li Auto,LI,2026-02,26421,https://ir.lixiang.com/news-releases/news-release-details/li-auto-inc-february-2026-delivery-update/,2026-03-01,已核实,最新,公司月度交付公告
+Li Auto,LI,2026-03,41053,https://ir.lixiang.com/news-releases/news-release-details/li-auto-inc-march-2026-delivery-update/,2026-04-01,已核实,最新,公司月度交付公告
+Li Auto,LI,2026-04,34085,https://ir.lixiang.com/news-releases/news-release-details/li-auto-inc-april-2026-delivery-update,2026-05-01,已核实,最新,公司月度交付公告
+XPeng,XPEV,2026-01,20011,https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0202/2026020202088.pdf,2026-02-02,已核实,最新,HKEX公告
+XPeng,XPEV,2026-02,15256,https://ir.xiaopeng.com/node/9861/pdf,2026-03-01,已核实,最新,公司月度交付公告
+XPeng,XPEV,2026-03,27415,https://www.sec.gov/Archives/edgar/data/1810997/000119312526135938/d10967dex991.htm,2026-04-01,已核实,最新,SEC 6-K
+XPeng,XPEV,2026-04,31011,https://www.sec.gov/Archives/edgar/data/1810997/000119312526202397/d119120dex991.htm,2026-05-01,已核实,最新,SEC 6-K

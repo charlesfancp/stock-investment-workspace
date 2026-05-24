@@ -1,0 +1,36 @@
+portfolio_value_usd: null
+cash_usd: null
+as_of: null
+notes: Fill this file manually after trades are confirmed. The system must not infer real holdings.
+
+positions:
+  - ticker: NVDA
+    shares: null
+    average_cost: null
+  - ticker: TSM
+    shares: null
+    average_cost: null
+  - ticker: AVGO
+    shares: null
+    average_cost: null
+  - ticker: GOOGL
+    shares: null
+    average_cost: null
+  - ticker: AMZN
+    shares: null
+    average_cost: null
+  - ticker: MU
+    shares: null
+    average_cost: null
+  - ticker: GEV
+    shares: null
+    average_cost: null
+  - ticker: VRT
+    shares: null
+    average_cost: null
+  - ticker: ETN
+    shares: null
+    average_cost: null
+  - ticker: DLR
+    shares: null
+    average_cost: null

@@ -1,0 +1,4 @@
+date,ticker,share_class,current_price,market_cap_usd_bn,pe_ratio,price_change_pct,regular_close_time,pre_market_price,source_name,source_url,captured_at,notes
+2026-05-20,GOOGL,Class A,387.66,4696.89,29.57,-2.315,2026-05-20 13:05:01 UTC,,Market quote lookup,https://www.google.com/finance/quote/GOOGL:NASDAQ,2026-05-20T06:05:01-0700,行情快照；仅用于看盘，不解锁 R/R；完整估值仍需 valuation_snapshot.csv
+2026-05-20,GOOG,Class C,384.90,4663.45,29.36,-2.088,2026-05-20 13:05:01 UTC,,Market quote lookup,https://www.google.com/finance/quote/GOOG:NASDAQ,2026-05-20T06:05:01-0700,行情快照；仅用于看盘，不解锁 R/R；完整估值仍需 valuation_snapshot.csv
+2026-05-22,GOOGL,Class A,382.97,4640.06,29.21,-1.21,2026-05-22 16:00:00 ET,382.26,MarketBeat / Benzinga quote cross-check,https://www.marketbeat.com/stocks/NASDAQ/GOOGL/forecast/,2026-05-23T00:00:00-0700,2026-05-22 收盘价；MarketBeat 和 Benzinga 均显示 382.97；市值和 PE 按 2026-05-20 快照比例近似更新，仅用于看盘和估值复核

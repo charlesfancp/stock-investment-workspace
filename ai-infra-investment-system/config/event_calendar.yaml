@@ -1,0 +1,119 @@
+events:
+  - ticker: NVDA
+    event_type: earnings
+    event_date: 2026-05-20
+    title: NVIDIA 1st Quarter FY27 Financial Results
+    source: NVIDIA Investor Relations
+    source_url: https://investor.nvidia.com/events-and-presentations/events-and-presentations/event-details/default.aspx
+    source_tier: tier_1
+    status: confirmed
+    review_file: reviews/event_reviews/2026-05-20_NVDA_earnings.md
+    notes: Official NVIDIA IR event page lists the Q1 FY27 financial results event.
+  - ticker: TSM
+    event_type: monthly_sales
+    event_date: 2026-06-10
+    title: TSMC Monthly Sales - May 2026
+    source: TSMC Investor Relations Financial Calendar
+    source_url: https://investor.tsmc.com/english/financial-calendar
+    source_tier: tier_1
+    status: confirmed
+    review_file: reviews/event_reviews/2026-06-10_TSM_monthly_sales.md
+    notes: Official TSMC financial calendar lists the May 2026 monthly sales release.
+  - ticker: AVGO
+    event_type: earnings
+    event_date: 2026-06-03
+    title: Q2 2026 Broadcom Earnings Conference Call
+    source: Broadcom Investor Relations Events and Presentations
+    source_url: https://investors.broadcom.com/company-information/events-presentations
+    source_tier: tier_1
+    status: confirmed
+    review_file: reviews/event_reviews/2026-06-03_AVGO_earnings.md
+    notes: Official Broadcom IR events page lists the Q2 2026 earnings conference call.
+  - ticker: GOOGL
+    event_type: annual_meeting
+    event_date: 2026-06-05
+    title: Alphabet 2026 Annual Meeting of Shareholders
+    source: Alphabet Investor Relations Annual Meeting
+    source_url: https://abc.xyz/investor/annual-meeting/
+    source_tier: tier_1
+    status: confirmed
+    review_file: reviews/event_reviews/2026-06-05_GOOGL_annual_meeting.md
+    notes: Official Alphabet IR page lists the 2026 annual meeting date and webcast details.
+  - ticker: AMZN
+    event_type: annual_meeting
+    event_date: 2026-05-20
+    title: Amazon 2026 Annual Meeting of Shareholders
+    source: Amazon 2026 Proxy Statement
+    source_url: https://www.ezodproxy.com/amazon/2026/proxy/images/Amazon_Proxy2026.pdf
+    source_tier: tier_1
+    status: confirmed
+    review_file: reviews/event_reviews/2026-05-20_AMZN_annual_meeting.md
+    notes: Official Amazon proxy statement lists the 2026 annual meeting date and virtual meeting site.
+  - ticker: MU
+    event_type: investor_conference
+    event_date: 2026-05-20
+    title: Micron at J.P. Morgan Global Technology, Media and Communications Conference
+    source: Micron Investor Relations Press Release
+    source_url: https://investors.micron.com/news-releases/news-release-details/micron-announces-participation-investor-event-3
+    source_tier: tier_1
+    status: confirmed
+    review_file: reviews/event_reviews/2026-05-20_MU_jpm_conference.md
+    notes: Official Micron IR release lists management participation on May 20, 2026.
+  - ticker: GEV
+    event_type: annual_meeting
+    event_date: 2026-05-20
+    title: GE Vernova 2026 Annual Stockholders Meeting
+    source: GE Vernova Investor Relations Events
+    source_url: https://www.gevernova.com/investors/events
+    source_tier: tier_1
+    status: confirmed
+    review_file: reviews/event_reviews/2026-05-20_GEV_annual_meeting.md
+    notes: Official GE Vernova IR events page lists the 2026 annual stockholders meeting.
+  - ticker: VRT
+    event_type: investor_conference
+    event_date: 2026-05-19
+    title: Vertiv 2026 Investor Conference
+    source: Vertiv Investor Relations Events
+    source_url: https://investors.vertiv.com/events-presentations/events-presentations/event-details/2026/Vertiv-2026-Investor-Conference-2026-5Cbm8SNqdX/default.aspx
+    source_tier: tier_1
+    status: confirmed
+    review_file: reviews/event_reviews/2026-05-19_VRT_investor_conference.md
+    notes: Official Vertiv IR event page lists the 2026 Investor Conference from May 19 to May 20.
+  - ticker: ETN
+    event_type: annual_meeting
+    event_date: 2026-04-22
+    title: Eaton 2026 Annual General Meeting of Shareholders
+    source: Eaton 2026 Proxy Statement and Notice of Meeting
+    source_url: https://www.eaton.com/content/dam/eaton/company/investor-relations/proxy-statement/eaton-2026-proxy-statement-notice-of-meeting.pdf
+    source_tier: tier_1
+    status: confirmed
+    review_file: reviews/event_reviews/2026-04-22_ETN_annual_meeting.md
+    notes: Official Eaton proxy statement lists the 2026 annual general meeting; next future earnings date still needs official confirmation.
+  - ticker: DLR
+    event_type: annual_meeting
+    event_date: 2026-05-29
+    title: Digital Realty 2026 Annual Meeting of Stockholders
+    source: Digital Realty 2026 Proxy Statement
+    source_url: https://www.sec.gov/Archives/edgar/data/1297996/000130817926000296/dlr_courtesy-pdf.pdf
+    source_tier: tier_1
+    status: confirmed
+    review_file: reviews/event_reviews/2026-05-29_DLR_annual_meeting.md
+    notes: Digital Realty proxy statement filed with the SEC lists the 2026 annual meeting.
+
+watch_topics:
+  - topic: hyperscaler_capex
+    event_type: industry
+    source_requirement: tier_1_or_two_tier_2
+    notes: Microsoft, Google, Amazon, Meta AI CapEx updates.
+  - topic: hbm_pricing
+    event_type: industry
+    source_requirement: tier_1_or_two_tier_2
+    notes: HBM price and supply-demand updates.
+  - topic: data_center_power
+    event_type: industry
+    source_requirement: tier_1_or_two_tier_2
+    notes: Power availability, grid constraints, generator and cooling demand.
+  - topic: export_controls
+    event_type: risk
+    source_requirement: tier_1
+    notes: Official export control or sanctions updates.

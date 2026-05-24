@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>快手-可灵投研操作台</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">1024.HK · 快手科技</p>
+          <h1>快手-可灵投研操作台</h1>
+          <p id="updatedAt" class="muted">正在读取本地数据</p>
+        </div>
+        <div class="actions">
+          <button id="runAll" class="primary">全部更新</button>
+          <button id="runDaily">每日更新</button>
+          <button id="runWeekly">周报</button>
+          <button id="runBear">反证</button>
+        </div>
+      </header>
+
+      <section class="decision-grid">
+        <article class="decision">
+          <span class="label">今日动作</span>
+          <strong id="action">--</strong>
+          <p id="actionNote">最终决策需人工确认</p>
+        </article>
+        <article class="metric">
+          <span class="label">最新股价</span>
+          <strong id="price">--</strong>
+          <p id="priceMeta">--</p>
+        </article>
+        <article class="metric">
+          <span class="label">基准目标价</span>
+          <strong id="baseTarget">--</strong>
+          <p id="baseUpside">--</p>
+        </article>
+        <article class="metric">
+          <span class="label">数据状态</span>
+          <strong id="status">就绪</strong>
+          <p id="statusDetail">可手动刷新</p>
+        </article>
+      </section>
+
+      <section class="layout">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>估值表</h2>
+          <p>目标价与上行空间</p>
+            </div>
+            <button id="refresh">刷新页面数据</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>情景</th>
+                  <th>目标价</th>
+                  <th>上行/下行</th>
+                  <th>核心业务价值</th>
+                  <th>可灵持有价值</th>
+                </tr>
+              </thead>
+              <tbody id="valuationRows"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <aside class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>最新记录</h2>
+              <p>已转中文显示</p>
+            </div>
+          </div>
+          <div id="announcements" class="list"></div>
+        </aside>
+      </section>
+
+      <section class="panel analyst-panel">
+        <div class="panel-head">
+          <div>
+            <h2>顶级分析师判断</h2>
+            <p>大行/机构观点，中文摘要显示，保留原文来源</p>
+          </div>
+        </div>
+        <div id="analystViews" class="analyst-grid"></div>
+      </section>
+
+      <section class="layout evidence-layout">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>证据状态</h2>
+              <p>只让已核实、有日期的事实支撑顶部判断</p>
+            </div>
+          </div>
+          <div id="evidenceItems" class="evidence-list"></div>
+        </article>
+
+        <aside class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>触发条件</h2>
+              <p>加仓、减仓、止损和重新评估规则</p>
+            </div>
+          </div>
+          <div id="triggerRules" class="trigger-list"></div>
+        </aside>
+      </section>
+
+      <section class="layout position-layout">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>买入测算</h2>
+              <p>按最新价计算整手买入，不含佣金和税费</p>
+            </div>
+          </div>
+          <div class="buy-form">
+            <label for="budget">预算 HKD</label>
+            <input id="budget" type="number" min="0" step="1000" value="100000" />
+            <label for="note">备注</label>
+            <input id="note" type="text" placeholder="例如：首次建仓观察 / 等待融资公告" />
+            <button id="recordBuy" class="primary">记录测算</button>
+          </div>
+          <div class="position-card">
+            <div>
+              <span>可买手数</span>
+              <strong id="calcLots">--</strong>
+            </div>
+            <div>
+              <span>对应股数</span>
+              <strong id="calcShares">--</strong>
+            </div>
+            <div>
+              <span>预计金额</span>
+              <strong id="calcGross">--</strong>
+            </div>
+            <div>
+              <span>剩余现金</span>
+              <strong id="calcCash">--</strong>
+            </div>
+          </div>
+          <p id="lotSource" class="footnote">每手股数待读取</p>
+        </article>
+
+        <aside class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>记录与复盘</h2>
+              <p>可改备注或删除误操作</p>
+            </div>
+          </div>
+          <div id="positionRecords" class="records"></div>
+        </aside>
+      </section>
+
+      <section class="panel review-panel">
+        <div class="panel-head">
+          <div>
+            <h2>30/60/90 天复盘</h2>
+            <p>跟踪 50 港元以下观察仓假设是否被验证或推翻</p>
+          </div>
+        </div>
+        <div id="reviewTimeline" class="review-grid"></div>
+      </section>
+
+      <section class="panel reports">
+        <div class="panel-head">
+          <div>
+            <h2>报告阅读</h2>
+            <p>直接查看系统生成的 markdown 报告</p>
+          </div>
+          <div class="tabs">
+            <button class="active" data-report="daily">日报</button>
+            <button data-report="valuation">估值</button>
+            <button data-report="weekly">周报</button>
+            <button data-report="bear">反证</button>
+            <button data-report="run">运行记录</button>
+          </div>
+        </div>
+        <pre id="report"></pre>
+      </section>
+    </main>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>

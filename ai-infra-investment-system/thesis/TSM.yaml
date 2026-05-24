@@ -1,0 +1,32 @@
+ticker: TSM
+role: 先进制造地段
+target_weight: 17
+base_case_probability: null
+bull_case_probability: null
+bear_case_probability: null
+buy_thesis:
+  - AI 加速器需求继续推动先进制程和先进封装。
+  - CoWoS 产能扩张支撑 AI 产业链核心瓶颈价值。
+  - 先进节点领先优势提升定价能力和客户黏性。
+key_metrics:
+  - advanced_node_revenue_mix
+  - cowos_capacity_utilization
+  - ai_customer_demand
+  - gross_margin
+  - capex_guidance
+add_conditions:
+  - advanced_node_demand_above_expectation: true
+  - cowos_supply_still_tight: true
+reduce_conditions:
+  - advanced_node_demand_cut: true
+  - cowos_utilization_decline: true
+  - major_customer_order_cut: true
+stop_loss:
+  price: null
+targets:
+  first: null
+  second: null
+reversal_triggers:
+  - advanced_node_demand_cut
+  - cowos_utilization_decline
+  - major_geopolitical_escalation

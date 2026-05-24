@@ -1,0 +1,29 @@
+kuaishou:
+  adjusted_net_profit_rmb_bn: 20.6
+  core_pe_bear: 9
+  core_pe_base: 11
+  core_pe_bull: 14
+
+kling:
+  arr_usd_mn_official: 240
+  arr_usd_mn_bear: 300
+  arr_usd_mn_base: 500
+  arr_usd_mn_bull: 1000
+  ps_bear: 15
+  ps_base: 25
+  ps_bull: 35
+  kuaishou_ownership_bear: 0.75
+  kuaishou_ownership_base: 0.85
+  kuaishou_ownership_bull: 0.90
+
+market:
+  cny_hkd: 1.08
+  usd_hkd: 7.80
+  shares_outstanding_bn: 4.22
+  current_price_hkd:
+
+metadata:
+  source: manual_initial_assumptions
+  source_date: 2026-05-14
+  updated_at: 2026-05-14
+  notes: "Initial manual assumptions. Replace with verified facts before formal investment use."

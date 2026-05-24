@@ -1,0 +1,4 @@
+symbol: 1024.HK
+board_lot_shares: 100
+default_budget_hkd: 100000
+source: "Lot size 100 from HK warrants quote pages; verify with broker before live order."

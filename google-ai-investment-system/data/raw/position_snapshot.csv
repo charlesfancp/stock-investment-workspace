@@ -1,0 +1,2 @@
+date,ticker,shares,avg_cost,current_price,market_value_usd,unrealized_pnl_pct,position_weight_pct,cash_available_usd,source,notes
+数据缺失,数据缺失,数据缺失,数据缺失,数据缺失,数据缺失,数据缺失,数据缺失,数据缺失,数据缺失,仓位快照待手工录入；如无真实持仓可保持数据缺失

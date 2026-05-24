@@ -1,0 +1,7 @@
+company,ticker,market,date,price,currency,market_cap_usd_bn,source,verification,note
+Li Auto,LI,Nasdaq,2026-05-15,18.51,USD,18.93,https://stockanalysis.com/stocks/li/market-cap/,已核实,第三方行情；访问日期2026-05-17
+Li Auto,2015.HK,HKEX,2026-05-15,75.60,HKD,,https://stockanalysis.com/quote/hkg/2015/history/,已核实,第三方行情；访问日期2026-05-17
+XPeng,XPEV,NYSE,2026-05-07,15.55,USD,14.87,https://stockanalysis.com/stocks/xpev/market-cap/,已核实,第三方行情；访问日期2026-05-17；未核实到2026-05-15美股收盘
+XPeng,9868.HK,HKEX,2026-05-15,60.20,HKD,,https://stockinvest.us/stock-price/9868.HK,已核实,第三方行情；访问日期2026-05-17
+Li Auto,LI,Nasdaq,2026-05-19,16.03,USD,31.42,finance quote,已核实,盘中/延迟行情；13:53:50 UTC；交易前需复核
+XPeng,XPEV,NYSE,2026-05-19,14.89,USD,28.03,finance quote,已核实,盘中/延迟行情；13:53:53 UTC；交易前需复核

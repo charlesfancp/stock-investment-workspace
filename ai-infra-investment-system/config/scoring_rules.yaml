@@ -1,0 +1,27 @@
+score_weights:
+  industry_momentum: 25
+  fundamentals: 25
+  valuation_rr: 20
+  catalysts: 10
+  risk_penalty: 10
+  technicals: 10
+
+action_thresholds:
+  strong_buy: 85
+  buy: 70
+  hold: 55
+  reduce: 40
+  sell: 0
+
+hard_rules:
+  original_thesis_broken_forces_downgrade: true
+  missing_data_must_be_labeled: true
+  no_trade_without_human_confirmation: true
+
+module_notes:
+  industry_momentum: 所在 AI 基础设施主线是否继续上行。
+  fundamentals: 收入、利润率、订单、backlog、指引和现金流质量。
+  valuation_rr: 当前价格相对目标价、估值倍数、拥挤度和下行空间。
+  catalysts: 财报、产品发布、大客户订单、政策和产业事件。
+  risk_penalty: 监管、地缘、周期、客户集中、杠杆和订单风险；该模块用于扣分。
+  technicals: 趋势、均线、回撤和波动率。

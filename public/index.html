@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>单股每日信息面板</title>
+    <script>
+      if (window.location.protocol === "file:") {
+        window.location.replace("http://localhost:5173/");
+      }
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">单只股票每日检查</p>
+          <h1 id="companyName">德翔海运</h1>
+          <div class="subline">
+            <span id="stockMeta">02510 · HKEX</span>
+            <span id="lastUpdated">等待刷新</span>
+          </div>
+        </div>
+        <form id="stockForm" class="stock-form">
+          <label for="stockCode">港股代码/简称</label>
+          <div class="form-row">
+            <input id="stockCode" list="stockOptions" autocomplete="off" placeholder="02510 / 德翔海运 / TS LINES" value="02510" />
+            <datalist id="stockOptions"></datalist>
+            <button type="submit" title="刷新数据" aria-label="刷新数据">↻</button>
+          </div>
+          <span id="stockAlias" class="stock-alias">简称：德翔海运 / TS LINES</span>
+        </form>
+      </header>
+
+      <section class="hero-grid">
+        <article class="quote-panel">
+          <div class="panel-head">
+            <div>
+              <p class="label">当日走势</p>
+              <div class="price-row">
+                <span id="price">--</span>
+                <span id="currency">HKD</span>
+              </div>
+            </div>
+            <span id="priceMove" class="move-pill neutral">--</span>
+          </div>
+          <canvas id="intradayChart" class="mini-chart" width="760" height="210" aria-label="当日走势图"></canvas>
+          <p id="intradayCaption" class="chart-note">等待当日行情</p>
+          <div class="metric-grid compact">
+            <div>
+              <span>今日高低</span>
+              <strong id="dayRange">--</strong>
+            </div>
+            <div>
+              <span>当日成交量</span>
+              <strong id="volume">--</strong>
+            </div>
+            <div>
+              <span>当日成交额</span>
+              <strong id="turnover">--</strong>
+            </div>
+            <div>
+              <span>数据时间</span>
+              <strong id="marketTime">--</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="decision-panel">
+          <div class="panel-title-row">
+            <h2>今日判断提示</h2>
+            <span id="signalBadge" class="signal neutral">加载中</span>
+          </div>
+          <ul id="signals" class="signal-list">
+            <li>正在读取价格、公告和新闻。</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="panel anomaly-panel">
+        <div class="panel-title-row">
+          <div>
+            <h2>异动解释</h2>
+            <p id="anomalySummary">等待量价和消息面数据</p>
+          </div>
+          <span id="anomalyBadge" class="signal neutral">待判断</span>
+        </div>
+        <div id="anomalyPoints" class="anomaly-grid">
+          <div>正在读取成交量、均线和最新消息。</div>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel chart-panel">
+          <div class="panel-title-row">
+            <div>
+              <h2>价格趋势</h2>
+              <p id="chartCaption">过去一年收盘价</p>
+            </div>
+            <div class="segmented" aria-label="图表周期">
+              <button class="active" data-range="365">1年</button>
+              <button data-range="180">6月</button>
+              <button data-range="60">60日</button>
+            </div>
+          </div>
+          <canvas id="priceChart" width="980" height="360" aria-label="价格走势图"></canvas>
+        </article>
+
+        <aside class="panel watch-panel">
+          <div class="panel-title-row">
+            <div>
+              <h2>研究与社区观点</h2>
+              <p>近3个月机构研究 + 社区热议摘要</p>
+            </div>
+            <a id="researchSearchLink" href="#" target="_blank" rel="noreferrer">更多</a>
+          </div>
+          <div id="research" class="doc-list"></div>
+          <div id="forumLinks" class="forum-links"></div>
+        </aside>
+      </section>
+
+      <section class="two-column">
+        <article class="panel">
+          <div class="panel-title-row">
+            <div>
+              <h2>最新公告</h2>
+              <p id="announcementCount">HKEX 最新5条中文公告</p>
+            </div>
+            <a id="disclosureLink" href="#" target="_blank" rel="noreferrer">权益披露</a>
+          </div>
+          <div id="announcements" class="news-list"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-title-row">
+            <div>
+              <h2>相关新闻</h2>
+              <p>最新5条 · 财经评价网站</p>
+            </div>
+            <a id="newsSearchLink" href="#" target="_blank" rel="noreferrer">更多</a>
+          </div>
+          <div id="news" class="news-list"></div>
+        </article>
+      </section>
+
+      <footer class="footer">
+        <span>数据来源：Yahoo Finance、Stooq、HKEXnews、Google News RSS。</span>
+        <span>仅作信息整理，不构成投资建议。</span>
+      </footer>
+    </main>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>

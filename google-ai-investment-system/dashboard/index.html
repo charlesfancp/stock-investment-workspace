@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Alphabet / Google 投资决策面板</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="styles.css?v=20260520" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Alphabet / Google 投资跟踪</p>
+        <h1>决策面板</h1>
+      </div>
+      <div class="status-strip">
+        <div><span>更新时间</span><strong id="updatedAt">--</strong></div>
+        <div><span>置信度</span><strong id="confidence">--</strong></div>
+        <div><span>交易资格</span><strong id="eligibility">--</strong></div>
+      </div>
+    </header>
+
+    <main>
+      <section class="decision-band">
+        <div>
+          <span class="label">当前判断</span>
+          <h2 id="decision">读取中</h2>
+        </div>
+        <div>
+          <span class="label">当前动作</span>
+          <p id="action" class="action">--</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>行情看板</h2>
+        <div id="marketGrid" class="grid four"></div>
+      </section>
+
+      <section>
+        <h2>R/R 解锁状态</h2>
+        <div id="rrGateSummary" class="gate-summary"></div>
+        <div id="rrGateGrid" class="grid four"></div>
+      </section>
+
+      <section>
+        <h2>综合评分</h2>
+        <div id="scoreGrid" class="grid four"></div>
+      </section>
+
+      <section>
+        <h2>投资命题</h2>
+        <div id="thesisGrid" class="grid four"></div>
+      </section>
+
+      <section>
+        <h2>Google I/O 2026 事件影响</h2>
+        <div id="ioSummary" class="gate-summary"></div>
+        <div id="ioGrid" class="grid three"></div>
+        <div id="ioWatchlist" class="grid three"></div>
+      </section>
+
+      <section>
+        <h2>投行与共识目标价</h2>
+        <div id="analystSummary" class="gate-summary"></div>
+        <div id="analystGrid" class="grid three"></div>
+      </section>
+
+      <section>
+        <h2>情景概率</h2>
+        <div id="scenarioGrid" class="grid three"></div>
+      </section>
+
+      <section>
+        <h2>估值与仓位</h2>
+        <div id="valuationPanel" class="valuation"></div>
+      </section>
+
+      <section>
+        <h2>价格敏感性</h2>
+        <div id="priceSensitivitySummary" class="gate-summary"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>假设股价</th>
+                <th>上行</th>
+                <th>下行</th>
+                <th>R/R</th>
+                <th>动作区间</th>
+                <th>备注</th>
+              </tr>
+            </thead>
+            <tbody id="priceSensitivityRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>估值情景矩阵</h2>
+        <div id="valuationScenarioSummary" class="gate-summary"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>情景</th>
+                <th>概率</th>
+                <th>目标价</th>
+                <th>下行价</th>
+                <th>买入复核价</th>
+                <th>减仓复盘价</th>
+                <th>当前 R/R</th>
+                <th>当前动作</th>
+              </tr>
+            </thead>
+            <tbody id="valuationScenarioRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>手工录入</h2>
+        <div class="forms">
+          <form id="marketForm" class="input-form">
+            <h3>行情快照</h3>
+            <div class="form-grid">
+              <input name="date" placeholder="日期 YYYY-MM-DD" />
+              <input name="ticker" placeholder="Ticker: GOOG / GOOGL" />
+              <input name="share_class" placeholder="股本类别 Class A / Class C" />
+              <input name="current_price" placeholder="当前/收盘价格" />
+              <input name="market_cap_usd_bn" placeholder="市值 USD bn" />
+              <input name="pe_ratio" placeholder="PE" />
+              <input name="price_change_pct" placeholder="涨跌幅 %" />
+              <input name="regular_close_time" placeholder="报价时间/收盘时间" />
+              <input name="pre_market_price" placeholder="盘前价，可空" />
+              <input name="source_name" placeholder="来源名称" />
+              <input name="source_url" placeholder="来源链接" />
+              <input name="captured_at" placeholder="抓取/录入时间" />
+            </div>
+            <textarea name="notes" placeholder="备注：报价口径、盘中/收盘、是否官方/非官方价格源"></textarea>
+            <button type="submit">保存行情快照</button>
+          </form>
+
+          <form id="valuationForm" class="input-form">
+            <h3>价格 / 估值快照</h3>
+            <div class="form-grid">
+              <input name="date" placeholder="日期 YYYY-MM-DD" />
+              <input name="ticker" placeholder="Ticker: GOOG / GOOGL" />
+              <input name="current_price" placeholder="当前价格" />
+              <input name="target_price_base" placeholder="基准目标价" />
+              <input name="downside_price" placeholder="风险下行价" />
+              <input name="market_cap_usd_bn" placeholder="市值 USD bn" />
+              <input name="pe_ratio" placeholder="PE" />
+              <input name="fcf_yield_pct" placeholder="FCF yield %" />
+              <input name="source_url" placeholder="来源链接" />
+              <input name="source_date" placeholder="来源/交易日期" />
+              <input name="captured_at" placeholder="抓取/录入日期" />
+              <input name="valuation_methodology" placeholder="估值方法" />
+            </div>
+            <textarea name="notes" placeholder="备注：币种、收盘/盘中、数据限制"></textarea>
+            <button type="submit">保存估值快照</button>
+          </form>
+
+          <form id="positionForm" class="input-form">
+            <h3>仓位快照</h3>
+            <div class="form-grid">
+              <input name="date" placeholder="日期 YYYY-MM-DD" />
+              <input name="ticker" placeholder="Ticker" />
+              <input name="shares" placeholder="持股数" />
+              <input name="avg_cost" placeholder="平均成本" />
+              <input name="current_price" placeholder="当前价格" />
+              <input name="market_value_usd" placeholder="市值 USD" />
+              <input name="unrealized_pnl_pct" placeholder="浮盈/亏 %" />
+              <input name="position_weight_pct" placeholder="仓位占比 %" />
+              <input name="cash_available_usd" placeholder="可用现金 USD" />
+              <input name="source" placeholder="来源/账户口径" />
+            </div>
+            <textarea name="notes" placeholder="备注：账户、汇率、是否真实持仓"></textarea>
+            <button type="submit">保存仓位快照</button>
+          </form>
+        </div>
+        <p id="saveStatus" class="muted"></p>
+      </section>
+
+      <section>
+        <h2>缺口清单</h2>
+        <div id="missingInputs" class="grid three"></div>
+      </section>
+
+      <section>
+        <h2>证据区</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>事实</th>
+                <th>数值</th>
+                <th>来源</th>
+                <th>日期</th>
+                <th>核实</th>
+                <th>时效</th>
+              </tr>
+            </thead>
+            <tbody id="evidenceRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>反方与退出</h2>
+        <div id="riskGrid" class="grid three"></div>
+        <div id="triggerGrid" class="grid three triggers"></div>
+      </section>
+
+      <section>
+        <h2>决策日志</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>日期</th>
+                <th>报告期</th>
+                <th>动作</th>
+                <th>评分</th>
+                <th>变化</th>
+              </tr>
+            </thead>
+            <tbody id="logRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>30/60/90 天复盘</h2>
+        <div id="reviewGrid" class="grid three"></div>
+      </section>
+    </main>
+
+    <script src="app.js?v=20260520"></script>
+  </body>
+</html>

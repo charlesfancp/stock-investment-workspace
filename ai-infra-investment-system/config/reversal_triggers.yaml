@@ -1,0 +1,136 @@
+confirmation_policy:
+  confirmed_trigger_requires:
+    - tier_1_source
+    - or_two_independent_tier_2_sources
+  tier_3_allowed_status: watch_only
+  missing_evidence_status: pending_evidence
+  confirmed_action_floor: reduce_review
+  trade_execution: human_confirmation_required
+
+portfolio_level:
+  - trigger: hyperscaler_capex_cut_by_two_or_more_companies
+    description: 两家或以上超大云厂商明确下调 AI CapEx 或数据中心建设计划。
+    forced_action: reduce_review
+  - trigger: nvda_data_center_guidance_miss
+    description: NVDA 数据中心收入指引明显不及预期，影响算力主线。
+    forced_action: reduce_review
+  - trigger: hbm_price_decline
+    description: HBM 价格出现趋势性下行，削弱内存瓶颈逻辑。
+    forced_action: reduce_review
+  - trigger: ai_server_inventory_build
+    description: AI 服务器库存堆积，说明需求或交付节奏出现问题。
+    forced_action: reduce_review
+  - trigger: cloud_ai_revenue_slowdown
+    description: 云厂商 AI 收入或云收入增长明显放缓。
+    forced_action: reduce_review
+  - trigger: interest_rate_spike
+    description: 利率快速上行并压制长久期成长资产或数据中心 REIT 估值。
+    forced_action: reduce_review
+
+ticker_level:
+  NVDA:
+    - trigger: gross_margin_down_two_quarters
+      description: 毛利率连续两个季度下滑。
+      forced_action: reduce_review
+    - trigger: data_center_growth_below_30_percent
+      description: 数据中心收入增长跌破 30%。
+      forced_action: reduce_review
+    - trigger: blackwell_or_rubin_delay
+      description: Blackwell 或 Rubin 出现重大延期。
+      forced_action: reduce_review
+
+  TSM:
+    - trigger: advanced_node_demand_cut
+      description: 先进节点需求被主要客户下修。
+      forced_action: reduce_review
+    - trigger: cowos_utilization_decline
+      description: CoWoS 产能利用率下滑。
+      forced_action: reduce_review
+    - trigger: major_geopolitical_escalation
+      description: 台海或地缘风险显著升级。
+      forced_action: reduce_review
+
+  AVGO:
+    - trigger: ai_revenue_guidance_miss
+      description: AI 收入指引不及预期。
+      forced_action: reduce_review
+    - trigger: custom_asic_project_delay
+      description: 定制 ASIC 项目延期。
+      forced_action: reduce_review
+    - trigger: hyperscaler_customer_loss
+      description: 失去重要超大云客户或项目。
+      forced_action: reduce_review
+
+  GOOGL:
+    - trigger: search_share_decline
+      description: 搜索份额出现实质性下滑。
+      forced_action: reduce_review
+    - trigger: doj_antitrust_material_damage
+      description: 反垄断事件对业务或利润造成实质损害。
+      forced_action: reduce_review
+    - trigger: cloud_growth_slowdown
+      description: Google Cloud 增长明显放缓。
+      forced_action: reduce_review
+
+  AMZN:
+    - trigger: aws_growth_below_20_percent
+      description: AWS 收入增长低于 20%。
+      forced_action: reduce_review
+    - trigger: capex_up_but_fcf_down
+      description: CapEx 继续上升但自由现金流恶化。
+      forced_action: reduce_review
+    - trigger: trainium_adoption_miss
+      description: Trainium/Inferentia 客户采用低于预期。
+      forced_action: reduce_review
+
+  MU:
+    - trigger: hbm_price_decline
+      description: HBM 价格趋势性下跌。
+      forced_action: reduce_review
+    - trigger: inventory_build
+      description: 库存重新堆积。
+      forced_action: reduce_review
+    - trigger: samsung_hbm_supply_surge
+      description: 竞争对手 HBM 供给大幅释放。
+      forced_action: reduce_review
+
+  GEV:
+    - trigger: data_center_orders_slow
+      description: 数据中心相关订单放缓。
+      forced_action: reduce_review
+    - trigger: gas_turbine_backlog_decline
+      description: 燃机 backlog 下滑。
+      forced_action: reduce_review
+    - trigger: electrification_margin_decline
+      description: 电气化业务利润率下滑。
+      forced_action: reduce_review
+
+  VRT:
+    - trigger: liquid_cooling_orders_miss
+      description: 液冷订单不及预期。
+      forced_action: reduce_review
+    - trigger: hyperscaler_delay
+      description: 超大云客户数据中心项目延期。
+      forced_action: reduce_review
+    - trigger: margin_decline
+      description: 利润率下滑。
+      forced_action: reduce_review
+
+  ETN:
+    - trigger: electrical_orders_slow
+      description: 电气设备订单放缓。
+      forced_action: reduce_review
+    - trigger: boyd_integration_issue
+      description: Boyd 或相关液冷整合出现问题。
+      forced_action: reduce_review
+
+  DLR:
+    - trigger: leasing_backlog_decline
+      description: 租赁 backlog 下滑。
+      forced_action: reduce_review
+    - trigger: financing_cost_spike
+      description: 融资成本快速上行。
+      forced_action: reduce_review
+    - trigger: development_delay
+      description: 数据中心开发项目延期。
+      forced_action: reduce_review

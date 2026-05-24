@@ -1,0 +1,175 @@
+schema_version: 1
+maintenance_mode: manual_confirmed_only
+notes: Scripts may read this file and generate CSV outputs, but must not infer or edit fundamentals automatically.
+
+metrics:
+  - ticker: NVDA
+    period: FY2026
+    revenue_growth_yoy: "65%"
+    gross_margin: "71.1% GAAP; 71.3% non-GAAP"
+    operating_margin: "60.4% GAAP, calculated as FY2026 operating income 130387 / revenue 215938"
+    free_cash_flow: "96575 USDm, calculated as operating cash flow 102718 - PP&E/intangibles purchases 6042 - principal payments 101"
+    capex: "6042 USDm purchases related to property and equipment and intangible assets"
+    guidance: "FY2027Q1 revenue expected at 78.0 USDbn +/-2%; GAAP/non-GAAP gross margin expected 74.9%/75.0% +/-50 bps"
+    ai_revenue_signal: "Data Center FY2026 revenue 193.7 USDbn, up 68%; Q4 Data Center revenue 62.3 USDbn, up 75% YoY"
+    orders_or_backlog_signal: "Management cited customers racing to invest in AI compute; FY2027Q1 outlook excludes China Data Center compute revenue"
+    source: NVIDIA FY2026 Q4 earnings release
+    source_url: https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Fourth-Quarter-and-Fiscal-2026/
+    source_tier: tier_1
+    source_type: original
+    source_date: 2026-02-25
+    verified_status: verified
+    notes: "口径：基本面采用 FY2026 全年；FCF 为公司定义口径的手工复算。"
+  - ticker: TSM
+    period: 2026Q1
+    revenue_growth_yoy: "35.1% in NTD; 40.6% in USD"
+    gross_margin: "66.2%"
+    operating_margin: "58.1%"
+    free_cash_flow: "11022 USDm, calculated as operating cash flow 22125 - PP&E acquisitions 11103"
+    capex: "11103 USDm acquisitions of property, plant and equipment"
+    guidance: "2026Q2 revenue expected 39.0-40.2 USDbn; gross margin 65.5%-67.5%; operating margin 56.5%-58.5%"
+    ai_revenue_signal: "Advanced technologies at 7nm and below represented 74% of wafer revenue; CFO cited continued strong demand for leading-edge process technologies"
+    orders_or_backlog_signal: "No quantified backlog in release; leading-edge process demand is the verified order proxy"
+    source: TSMC 2026Q1 earnings release and financial statements
+    source_url: https://investor.tsmc.com/english/quarterly-results/2026/q1
+    source_tier: tier_1
+    source_type: original
+    source_date: 2026-04-16
+    verified_status: verified
+    notes: "口径：美元数按 TSMC 披露换算表；FCF 为经营现金流减 PP&E 购置的手工复算。"
+  - ticker: AVGO
+    period: FY2026Q1
+    revenue_growth_yoy: "29%"
+    gross_margin: "68.1% GAAP, calculated as gross margin 13157 / revenue 19311"
+    operating_margin: "44.9% GAAP, calculated from release line items before income statement interest/tax items"
+    free_cash_flow: "8010 USDm"
+    capex: "250 USDm"
+    guidance: "FY2026Q2 revenue expected approximately 22.0 USDbn; adjusted EBITDA expected approximately 68% of projected revenue"
+    ai_revenue_signal: "Q1 AI revenue 8.4 USDbn, up 106% YoY, driven by custom AI accelerators and AI networking"
+    orders_or_backlog_signal: "Management expected FY2026Q2 AI semiconductor revenue of 10.7 USDbn"
+    source: Broadcom FY2026 Q1 earnings release
+    source_url: https://investors.broadcom.com/node/63976/pdf
+    source_tier: tier_1
+    source_type: original
+    source_date: 2026-03-04
+    verified_status: verified
+    notes: "口径：季度数据截至 2026-02-01；经营利润率为 GAAP 行项目手工复算。"
+  - ticker: GOOGL
+    period: 2026Q1
+    revenue_growth_yoy: "21.8%, calculated as revenue 109896 / 90234 - 1"
+    gross_margin: "62.4%, calculated as (revenues 109896 - cost of revenues 41271) / revenues"
+    operating_margin: "36.1%"
+    free_cash_flow: "10116 USDm"
+    capex: "35674 USDm purchases of property and equipment"
+    guidance: "No formal revenue guidance in Q1 release; company increased quarterly dividend to 0.22 USD per share"
+    ai_revenue_signal: "Google Cloud revenue increased 63% to 20.0 USDbn, led by GCP enterprise AI solutions and AI infrastructure"
+    orders_or_backlog_signal: "Google Cloud backlog nearly doubled quarter on quarter to over 460 USDbn"
+    source: Alphabet 2026Q1 earnings release and slides
+    source_url: https://s206.q4cdn.com/479360582/files/doc_financials/2026/q1/2026q1-alphabet-earnings-release.pdf
+    source_tier: tier_1
+    source_type: original
+    source_date: 2026-04-29
+    verified_status: verified
+    notes: "口径：Class A ticker GOOGL；FCF 为公司非 GAAP 口径。"
+  - ticker: AMZN
+    period: 2026Q1
+    revenue_growth_yoy: "16.6%, calculated as net sales 181519 / 155667 - 1"
+    gross_margin: "51.8%, calculated as (net sales 181519 - cost of sales 87463) / net sales"
+    operating_margin: "13.1%, calculated as operating income 23852 / net sales 181519"
+    free_cash_flow: "1232 USDm trailing twelve months, less equipment finance leases and principal repayments of all other finance leases and financing obligations"
+    capex: "147299 USDm trailing twelve months cash capital expenditures plus equipment acquired under finance leases and build-to-suit leases"
+    guidance: "2026Q2 net sales expected 194.0-199.0 USDbn, up 16%-19%; operating income expected 20.0-24.0 USDbn"
+    ai_revenue_signal: "AWS Q1 revenue 37.6 USDbn, up 28% YoY; Amazon chips business exceeded 20 USDbn annual revenue run rate"
+    orders_or_backlog_signal: "Trainium3 supply expected to be nearly committed by mid-2026, per Amazon Q4 2025 release; Q1 confirms AWS growth acceleration"
+    source: Amazon 2026Q1 earnings release
+    source_url: https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-First-Quarter-Results/?linkId=934580871
+    source_tier: tier_1
+    source_type: original
+    source_date: 2026-04-29
+    verified_status: verified
+    notes: "口径：Amazon 不披露传统制造业毛利率；此处毛利率为净销售额扣除 cost of sales 的手工复算，capex/FCF 使用公司 TTM 补充口径。"
+  - ticker: MU
+    period: null
+    revenue_growth_yoy: null
+    gross_margin: null
+    operating_margin: null
+    free_cash_flow: null
+    capex: null
+    guidance: null
+    ai_revenue_signal: null
+    orders_or_backlog_signal: null
+    source: null
+    source_url: null
+    source_tier: null
+    source_type: null
+    source_date: null
+    verified_status: null
+    notes: Fill manually from company earnings release, 10-Q/10-K, IR deck, or official transcript.
+  - ticker: GEV
+    period: null
+    revenue_growth_yoy: null
+    gross_margin: null
+    operating_margin: null
+    free_cash_flow: null
+    capex: null
+    guidance: null
+    ai_revenue_signal: null
+    orders_or_backlog_signal: null
+    source: null
+    source_url: null
+    source_tier: null
+    source_type: null
+    source_date: null
+    verified_status: null
+    notes: Fill manually from company earnings release, 10-Q/10-K, IR deck, or official transcript.
+  - ticker: VRT
+    period: null
+    revenue_growth_yoy: null
+    gross_margin: null
+    operating_margin: null
+    free_cash_flow: null
+    capex: null
+    guidance: null
+    ai_revenue_signal: null
+    orders_or_backlog_signal: null
+    source: null
+    source_url: null
+    source_tier: null
+    source_type: null
+    source_date: null
+    verified_status: null
+    notes: Fill manually from company earnings release, 10-Q/10-K, IR deck, or official transcript.
+  - ticker: ETN
+    period: null
+    revenue_growth_yoy: null
+    gross_margin: null
+    operating_margin: null
+    free_cash_flow: null
+    capex: null
+    guidance: null
+    ai_revenue_signal: null
+    orders_or_backlog_signal: null
+    source: null
+    source_url: null
+    source_tier: null
+    source_type: null
+    source_date: null
+    verified_status: null
+    notes: Fill manually from company earnings release, 10-Q/10-K, IR deck, or official transcript.
+  - ticker: DLR
+    period: null
+    revenue_growth_yoy: null
+    gross_margin: null
+    operating_margin: null
+    free_cash_flow: null
+    capex: null
+    guidance: null
+    ai_revenue_signal: null
+    orders_or_backlog_signal: null
+    source: null
+    source_url: null
+    source_tier: null
+    source_type: null
+    source_date: null
+    verified_status: null
+    notes: Fill manually from company earnings release, 10-Q/10-K, IR deck, or official transcript.

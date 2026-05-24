@@ -1,0 +1,33 @@
+ticker: NVDA
+role: 算力核心地段
+target_weight: 20
+base_case_probability: 65
+bull_case_probability: 20
+bear_case_probability: 15
+buy_thesis:
+  - CUDA 生态和 NVLink 构成高迁移成本。
+  - Blackwell/Rubin 整柜系统推动数据中心收入。
+  - Networking 业务提升系统级壁垒。
+key_metrics:
+  - data_center_revenue_growth
+  - gross_margin
+  - networking_revenue_growth
+  - hyperscaler_capex
+  - backlog_or_supply_commentary
+add_conditions:
+  - price_between: [200, 208]
+  - no_negative_fundamental_change: true
+  - data_center_growth_above_expectation: true
+reduce_conditions:
+  - gross_margin_decline_two_quarters: true
+  - data_center_guidance_miss: true
+  - hyperscaler_capex_cut: true
+stop_loss:
+  price: 198
+targets:
+  first: 260
+  second: 285
+reversal_triggers:
+  - blackwell_or_rubin_delay
+  - gross_margin_structural_decline
+  - major_customer_capex_cut

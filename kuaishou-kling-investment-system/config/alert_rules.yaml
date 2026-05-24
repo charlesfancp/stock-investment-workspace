@@ -1,0 +1,25 @@
+price_alerts:
+  strong_buy_below: 50
+  buy_zone_low: 50
+  buy_zone_high: 58
+  caution_above: 70
+  trim_above: 80
+  stop_loss: 44
+
+event_alerts:
+  kling_financing_confirmed: true
+  kling_valuation_above_usd_bn: 120
+  kling_valuation_below_usd_bn: 80
+  kuaishou_ownership_minimum: 0.80
+  ai_capex_above_rmb_bn: 30
+  adjusted_profit_decline_pct: -20
+
+decision_rules:
+  add_position_if:
+    - price_below_intrinsic_value_discount_25pct
+    - kling_financing_above_base_case
+    - core_business_profit_not_broken
+  reduce_position_if:
+    - price_above_base_target_without_event_confirmation
+    - financing_below_expectation
+    - profit_guidance_cut

@@ -1,0 +1,50 @@
+portfolio_name: AI Infrastructure Version B
+base_currency: USD
+trading_mode: human_confirmed_only
+rebalance_policy:
+  cadence: weekly_review
+  execution: manual_confirmation_required
+  drift_threshold_percentage_points: 2
+  notes: System generates research judgments and alerts only. It does not place trades.
+
+holdings:
+  - ticker: NVDA
+    company: NVIDIA
+    role: 算力核心地段
+    target_weight: 20
+  - ticker: TSM
+    company: Taiwan Semiconductor Manufacturing
+    role: 先进制造地段
+    target_weight: 17
+  - ticker: AVGO
+    company: Broadcom
+    role: ASIC/AI 网络地段
+    target_weight: 11
+  - ticker: GOOGL
+    company: Alphabet
+    role: 数据/模型/入口地段
+    target_weight: 17
+  - ticker: AMZN
+    company: Amazon
+    role: 云地产
+    target_weight: 15
+  - ticker: MU
+    company: Micron Technology
+    role: HBM 瓶颈建材
+    target_weight: 8
+  - ticker: GEV
+    company: GE Vernova
+    role: 电力基础设施地段
+    target_weight: 4
+  - ticker: VRT
+    company: Vertiv
+    role: AI 机房电力与散热
+    target_weight: 4
+  - ticker: ETN
+    company: Eaton
+    role: 电力与液冷稳健补充
+    target_weight: 2
+  - ticker: DLR
+    company: Digital Realty
+    role: 带电容量与数据中心地产
+    target_weight: 2

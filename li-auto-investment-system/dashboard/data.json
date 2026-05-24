@@ -1,0 +1,87 @@
+{
+  "updated_at": "2026-05-19",
+  "system": "LI vs XPEV 中国AI汽车 / 具身智能双标的投资决策系统",
+  "current_decision": "LI / XPEV 双持观察；Q1财报前不主动加仓",
+  "next_review": {
+    "date": "2026-05-28",
+    "event": "LI 和 XPEV 2026Q1 财报及电话会"
+  },
+  "portfolio_research_suggestion": {
+    "LI": "0%-3%",
+    "XPEV": "0%-3%",
+    "cash": "94%-100%",
+    "note": "研究建议，不是交易指令；真实交易必须人工确认"
+  },
+  "market_prices": {
+    "LI": {
+      "ticker": "LI",
+      "market": "Nasdaq",
+      "price": 16.03,
+      "currency": "USD",
+      "change": -0.66,
+      "change_pct": -3.954,
+      "open": 15.91,
+      "high": 16.08,
+      "low": 15.84,
+      "volume": 1949422,
+      "market_cap": 31423802001,
+      "trade_time": "2026-05-19 13:53:50 UTC",
+      "source": "finance quote",
+      "status": "盘中/延迟行情，需交易前复核"
+    },
+    "XPEV": {
+      "ticker": "XPEV",
+      "market": "NYSE",
+      "price": 14.89,
+      "currency": "USD",
+      "change": -0.17,
+      "change_pct": -1.129,
+      "open": 14.87,
+      "high": 15.08,
+      "low": 14.75,
+      "volume": 723795,
+      "market_cap": 28034004102,
+      "trade_time": "2026-05-19 13:53:53 UTC",
+      "source": "finance quote",
+      "status": "盘中/延迟行情，需交易前复核"
+    }
+  },
+  "scores": {
+    "LI": {
+      "total": 59,
+      "delivery_momentum": 61,
+      "financial_quality": 58,
+      "ai_robotics_execution": 55,
+      "business_quality_moat": 64,
+      "valuation_expectation_gap": 57,
+      "catalysts_risks": 63,
+      "rating": "继续跟踪，不买"
+    },
+    "XPEV": {
+      "total": 63,
+      "delivery_momentum": 57,
+      "financial_quality": 64,
+      "ai_robotics_execution": 70,
+      "business_quality_moat": 61,
+      "valuation_expectation_gap": 60,
+      "catalysts_risks": 65,
+      "rating": "观察仓 / 小仓试探，但Q1财报前不主动加仓"
+    }
+  },
+  "largest_opportunity": {
+    "LI": "L9 Livis推动高端家庭AI移动空间重估",
+    "XPEV": "VLA 2.0 / IRON / Physical AI平台重估"
+  },
+  "largest_risk": {
+    "LI": "毛利率和现金流未随交付修复；L9 Livis订单不强",
+    "XPEV": "MONA低价车型占比过高压低ASP；机器人未进入收入"
+  },
+  "sources": [
+    "https://ir.lixiang.com/news-releases/news-release-details/li-auto-inc-report-first-quarter-2026-financial-results-may-28",
+    "https://ir.lixiang.com/news-releases/news-release-details/li-auto-inc-announces-unaudited-fourth-quarter-and-full-year-4/",
+    "https://ir.lixiang.com/news-releases/news-release-details/li-auto-inc-april-2026-delivery-update",
+    "https://ir.xiaopeng.com/news-releases/news-release-details/xpeng-report-first-quarter-2026-financial-results-thursday-may",
+    "https://ir.xiaopeng.com/zh-hant/news-releases/news-release-details/xpeng-reports-fourth-quarter-and-fiscal-year-2025-unaudited",
+    "https://www.sec.gov/Archives/edgar/data/1810997/000119312526202397/d119120dex991.htm"
+  ]
+}

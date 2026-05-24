@@ -1,0 +1,10 @@
+benchmarks:
+  - ticker: QQQ
+    name: Invesco QQQ Trust
+    role: 纳斯达克 100 成长股基准
+  - ticker: SOXX
+    name: iShares Semiconductor ETF
+    role: 半导体行业基准
+  - ticker: SMH
+    name: VanEck Semiconductor ETF
+    role: AI 芯片与半导体设备基准

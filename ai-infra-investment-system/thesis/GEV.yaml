@@ -1,0 +1,32 @@
+ticker: GEV
+role: 电力基础设施地段
+target_weight: 4
+base_case_probability: null
+bull_case_probability: null
+bear_case_probability: null
+buy_thesis:
+  - AI 数据中心推高电力设备和燃机需求。
+  - 电网升级和电气化周期提高订单可见度。
+  - backlog 支撑中期收入增长。
+key_metrics:
+  - data_center_orders
+  - gas_turbine_backlog
+  - electrification_revenue_growth
+  - segment_margin
+  - free_cash_flow
+add_conditions:
+  - data_center_orders_accelerate: true
+  - backlog_expands: true
+reduce_conditions:
+  - data_center_orders_slow: true
+  - gas_turbine_backlog_decline: true
+  - electrification_margin_decline: true
+stop_loss:
+  price: null
+targets:
+  first: null
+  second: null
+reversal_triggers:
+  - data_center_orders_slow
+  - gas_turbine_backlog_decline
+  - electrification_margin_decline

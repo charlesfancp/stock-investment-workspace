@@ -1,0 +1,36 @@
+portfolio_value_usd: null
+cash_usd: null
+as_of: 2026-05-16
+notes: Example only. Do not put real account data in this file.
+
+positions:
+  - ticker: NVDA
+    shares: 0
+    average_cost: null
+  - ticker: TSM
+    shares: 0
+    average_cost: null
+  - ticker: AVGO
+    shares: 0
+    average_cost: null
+  - ticker: GOOGL
+    shares: 0
+    average_cost: null
+  - ticker: AMZN
+    shares: 0
+    average_cost: null
+  - ticker: MU
+    shares: 0
+    average_cost: null
+  - ticker: GEV
+    shares: 0
+    average_cost: null
+  - ticker: VRT
+    shares: 0
+    average_cost: null
+  - ticker: ETN
+    shares: 0
+    average_cost: null
+  - ticker: DLR
+    shares: 0
+    average_cost: null

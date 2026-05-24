@@ -1,0 +1,4 @@
+scenario,label,probability,target_price,downside_price,source_name,source_url,source_date,captured_at,methodology,verified_status,notes
+risk,风险,25,360,300,valuation_snapshot.csv / analyst_snapshot.csv,https://stockanalysis.com/stocks/googl/forecast/,2026-05-20,2026-05-20,风险情景为内部模型假设：在公开聚合目标价低位 334.22 附近下修下行价至 300，并将目标价设为 360，用于压力测试当前持有结论；不是已验证事实。,已核实,用于复盘监管、Search 分流、Cloud 降速和 FCF 压力；不直接生成交易指令
+base,基准,50,428.96,334.22,valuation_snapshot.csv / analyst_snapshot.csv,https://stockanalysis.com/stocks/googl/forecast/,2026-05-20,2026-05-20,基准情景沿用 valuation_snapshot.csv：目标价采用 StockAnalysis / S&P Global 64 位分析师平均目标价 428.96；下行价采用同一公开聚合样本低位 334.22；目标价和下行价为外部参考与模型假设。,已核实,当前 Phase 5 主结论使用的估值口径
+bull,乐观,25,475,350,valuation_snapshot.csv / analyst_snapshot.csv,https://stockanalysis.com/stocks/googl/forecast/,2026-05-20,2026-05-20,乐观情景为内部模型假设：在外部聚合样本高位附近上修目标价至 475，下行价设为 350，用于检验 Cloud/AI 兑现时的上行弹性；不是已验证事实。,已核实,仅作为上行情景压力测试；需后续财报验证 AI ROI 和 FCF

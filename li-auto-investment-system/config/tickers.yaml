@@ -1,0 +1,33 @@
+project:
+  name: li-auto-investment-system
+  positioning: 中国AI汽车 / 具身智能双标的投资判断系统
+  updated_at: 2026-05-17
+  decision_universe:
+    - 继续跟踪，不买
+    - 小仓试买 LI
+    - 小仓试买 XPEV
+    - LI / XPEV 双持观察
+    - 加仓 LI
+    - 加仓 XPEV
+    - 两者都加仓
+    - 减仓 / 清仓 LI
+    - 减仓 / 清仓 XPEV
+    - 两者都回避
+
+tickers:
+  LI:
+    company: Li Auto Inc.
+    cn_name: 理想汽车
+    us_ticker: LI
+    hk_ticker: "2015"
+    ads_ratio: "1 ADS = 2 Class A ordinary shares"
+    core_question: 是否能从高端家庭新能源车公司升级为家庭AI移动空间 / 具身智能平台公司
+    first_review_date: 2026-05-28
+  XPEV:
+    company: XPeng Inc.
+    cn_name: 小鹏汽车
+    us_ticker: XPEV
+    hk_ticker: "9868"
+    ads_ratio: "1 ADS = 2 Class A ordinary shares"
+    core_question: 是否能从智能电动车公司升级为 Physical AI / 机器人平台公司
+    first_review_date: 2026-05-28

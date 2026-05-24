@@ -1,0 +1,32 @@
+ticker: GOOGL
+role: 数据/模型/入口地段
+target_weight: 17
+base_case_probability: null
+bull_case_probability: null
+bear_case_probability: null
+buy_thesis:
+  - 搜索、YouTube、Android 和 Workspace 构成 AI 入口与数据优势。
+  - Gemini 和 TPU 有机会改善云业务和广告产品效率。
+  - 自有算力降低长期推理成本。
+key_metrics:
+  - google_cloud_growth
+  - search_revenue_growth
+  - ai_product_adoption
+  - capex_efficiency
+  - operating_margin
+add_conditions:
+  - cloud_growth_accelerates: true
+  - ai_products_improve_monetization: true
+reduce_conditions:
+  - search_share_decline: true
+  - cloud_growth_slowdown: true
+  - antitrust_material_damage: true
+stop_loss:
+  price: null
+targets:
+  first: null
+  second: null
+reversal_triggers:
+  - search_share_decline
+  - doj_antitrust_material_damage
+  - cloud_growth_slowdown

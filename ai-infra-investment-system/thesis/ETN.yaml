@@ -1,0 +1,31 @@
+ticker: ETN
+role: 电力与液冷稳健补充
+target_weight: 2
+base_case_probability: null
+bull_case_probability: null
+bear_case_probability: null
+buy_thesis:
+  - 电气化和数据中心建设提升配电设备需求。
+  - 业务更稳健，可作为电力基础设施补充仓位。
+  - 液冷和电力管理能力受益于 AI 机房升级。
+key_metrics:
+  - electrical_orders
+  - data_center_exposure
+  - margin
+  - backlog
+  - acquisition_integration_progress
+add_conditions:
+  - electrical_orders_accelerate: true
+  - data_center_exposure_expands: true
+reduce_conditions:
+  - electrical_orders_slow: true
+  - margin_decline: true
+  - integration_issue: true
+stop_loss:
+  price: null
+targets:
+  first: null
+  second: null
+reversal_triggers:
+  - electrical_orders_slow
+  - boyd_integration_issue

@@ -1,0 +1,15 @@
+company,ticker,metric,period,value,unit,source,date,verification,freshness,note
+Li Auto,LI,deliveries,FY2025,406343,vehicles,https://ir.lixiang.com/news-releases/news-release-details/li-auto-inc-announces-unaudited-fourth-quarter-and-full-year-4/,2026-03-12,已核实,有效,
+Li Auto,LI,total_revenue,FY2025,1123.125,RMB bn,https://ir.lixiang.com/news-releases/news-release-details/li-auto-inc-announces-unaudited-fourth-quarter-and-full-year-4/,2026-03-12,已核实,有效,
+Li Auto,LI,vehicle_margin,FY2025,17.9,percent,https://ir.lixiang.com/news-releases/news-release-details/li-auto-inc-announces-unaudited-fourth-quarter-and-full-year-4/,2026-03-12,已核实,有效,
+Li Auto,LI,gross_margin,FY2025,18.7,percent,https://ir.lixiang.com/news-releases/news-release-details/li-auto-inc-announces-unaudited-fourth-quarter-and-full-year-4/,2026-03-12,已核实,有效,
+Li Auto,LI,net_income,FY2025,1.1394,RMB bn,https://ir.lixiang.com/news-releases/news-release-details/li-auto-inc-announces-unaudited-fourth-quarter-and-full-year-4/,2026-03-12,已核实,有效,
+Li Auto,LI,free_cash_flow,FY2025,-12.8169,RMB bn,https://ir.lixiang.com/news-releases/news-release-details/li-auto-inc-announces-unaudited-fourth-quarter-and-full-year-4/,2026-03-12,已核实,有效,Non-GAAP FCF
+Li Auto,LI,cash_position,2025-12-31,101.2,RMB bn,https://ir.lixiang.com/news-releases/news-release-details/li-auto-inc-announces-unaudited-fourth-quarter-and-full-year-4/,2026-03-12,已核实,有效,
+XPeng,XPEV,deliveries,FY2025,429445,vehicles,https://ir.xiaopeng.com/zh-hant/news-releases/news-release-details/xpeng-reports-fourth-quarter-and-fiscal-year-2025-unaudited,2026-03-20,已核实,有效,
+XPeng,XPEV,total_revenue,FY2025,76.72,RMB bn,https://ir.xiaopeng.com/zh-hant/news-releases/news-release-details/xpeng-reports-fourth-quarter-and-fiscal-year-2025-unaudited,2026-03-20,已核实,有效,
+XPeng,XPEV,vehicle_margin,FY2025,12.8,percent,https://ir.xiaopeng.com/zh-hant/news-releases/news-release-details/xpeng-reports-fourth-quarter-and-fiscal-year-2025-unaudited,2026-03-20,已核实,有效,
+XPeng,XPEV,gross_margin,FY2025,18.9,percent,https://ir.xiaopeng.com/zh-hant/news-releases/news-release-details/xpeng-reports-fourth-quarter-and-fiscal-year-2025-unaudited,2026-03-20,已核实,有效,
+XPeng,XPEV,net_loss,FY2025,-1.14,RMB bn,https://ir.xiaopeng.com/zh-hant/news-releases/news-release-details/xpeng-reports-fourth-quarter-and-fiscal-year-2025-unaudited,2026-03-20,已核实,有效,
+XPeng,XPEV,net_profit,Q4_2025,0.38,RMB bn,https://ir.xiaopeng.com/zh-hant/news-releases/news-release-details/xpeng-reports-fourth-quarter-and-fiscal-year-2025-unaudited,2026-03-20,已核实,有效,首次单季度净利润转正
+XPeng,XPEV,cash_position,2025-12-31,47.66,RMB bn,https://ir.xiaopeng.com/zh-hant/news-releases/news-release-details/xpeng-reports-fourth-quarter-and-fiscal-year-2025-unaudited,2026-03-20,已核实,有效,

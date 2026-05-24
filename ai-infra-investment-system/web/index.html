@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI 基础设施投研控制台</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark">AI</div>
+          <div>
+            <h1>AI 基础设施</h1>
+            <p>投研控制台</p>
+          </div>
+        </div>
+
+        <nav class="nav-list" aria-label="主导航">
+          <a href="#decision" class="nav-link active">今日判断</a>
+          <a href="#overview" class="nav-link">总览</a>
+          <a href="#thesis" class="nav-link">投资命题</a>
+          <a href="#theme" class="nav-link">物理 AI</a>
+          <a href="#watchlist" class="nav-link">观察池</a>
+          <a href="#evidence" class="nav-link">证据</a>
+          <a href="#sources" class="nav-link">来源</a>
+          <a href="#risk" class="nav-link">风险</a>
+          <a href="#positions" class="nav-link">仓位记录</a>
+          <a href="#reviews" class="nav-link">复盘</a>
+          <a href="#events" class="nav-link">事件</a>
+          <a href="#reports" class="nav-link">报告</a>
+        </nav>
+
+        <div class="discipline">
+          <span>Research only</span>
+          <strong>不自动交易，不自动改 thesis，不自动改持仓。</strong>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Latest Dashboard · 2026-05-19</p>
+            <h2>AI 基础设施最终决策面板</h2>
+          </div>
+          <div class="topbar-actions">
+            <button id="refreshData" class="button secondary" type="button">刷新数据</button>
+            <a class="button secondary" href="../reports/weekly/latest_weekly_report.md" target="_blank" rel="noreferrer">周报</a>
+            <a class="button secondary" href="../reports/event/20260519_physical_ai_us_judgment.md" target="_blank" rel="noreferrer">物理 AI 判断</a>
+            <a class="button secondary" href="../docs/scb_may_2026_allocation_intake.md" target="_blank" rel="noreferrer">SCB 线索</a>
+            <button id="importRecords" class="button secondary" type="button">导入记录</button>
+            <button id="exportRecords" class="button primary" type="button">导出记录</button>
+            <input id="recordFileInput" class="visually-hidden" type="file" accept="application/json,.json" />
+          </div>
+        </header>
+
+        <section id="decision" class="section-grid decision-grid">
+          <div class="panel decision-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Decision</p>
+                <h3>今日判断</h3>
+              </div>
+              <span id="decisionBadge" class="status-pill neutral">读取中</span>
+            </div>
+            <p id="decisionSummary" class="decision-text">读取中</p>
+            <div id="decisionChips" class="chip-row"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Next</p>
+                <h3>下一步</h3>
+              </div>
+            </div>
+            <div id="nextActionList" class="action-list"></div>
+          </div>
+        </section>
+
+        <section id="overview" class="section-grid overview-grid">
+          <div class="panel hero-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Portfolio State</p>
+                <h3>组合状态</h3>
+              </div>
+              <span id="dataTimestamp" class="status-pill neutral">读取中</span>
+            </div>
+            <div class="metric-row">
+              <div class="metric">
+                <span>组合风险</span>
+                <strong id="portfolioRiskLevel">--</strong>
+              </div>
+              <div class="metric">
+                <span>过热标的</span>
+                <strong id="overheatCount">--</strong>
+              </div>
+              <div class="metric">
+                <span>14 天事件</span>
+                <strong id="eventCount">--</strong>
+              </div>
+              <div class="metric">
+                <span>持仓缺口</span>
+                <strong id="positionGap">--</strong>
+              </div>
+            </div>
+            <div class="theme-strip" id="themeStrip"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Allocation</p>
+                <h3>目标权重</h3>
+              </div>
+            </div>
+            <div id="allocationBars" class="bar-list"></div>
+          </div>
+        </section>
+
+        <section id="thesis" class="section-grid thesis-grid">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Thesis</p>
+                <h3>投资命题与情景概率</h3>
+              </div>
+              <span class="status-pill neutral">Version B</span>
+            </div>
+            <div id="scenarioGrid" class="scenario-grid"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Market</p>
+                <h3>市场基准</h3>
+              </div>
+            </div>
+            <div id="benchmarkPanel" class="benchmark-panel"></div>
+          </div>
+        </section>
+
+        <section id="theme" class="section-grid theme-grid">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Physical AI</p>
+                <h3>物理 AI 美股映射</h3>
+              </div>
+              <span class="status-pill neutral">线索已核查</span>
+            </div>
+            <div id="physicalAiMap" class="theme-map"></div>
+          </div>
+
+          <div id="evidence" class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Evidence</p>
+                <h3>证据资格</h3>
+              </div>
+            </div>
+            <div id="evidencePanel" class="evidence-panel"></div>
+          </div>
+        </section>
+
+        <section id="watchlist" class="section-grid two-column wide-left">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Watchlist</p>
+                <h3>新增观察池</h3>
+              </div>
+              <span class="status-pill neutral">不自动入组合</span>
+            </div>
+            <div id="watchlistGrid" class="watchlist-grid"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">External View</p>
+                <h3>SCB 配置线索</h3>
+              </div>
+              <a class="button secondary compact-button" href="../docs/scb_may_2026_allocation_intake.md" target="_blank" rel="noreferrer">打开</a>
+            </div>
+            <div id="scbPanel" class="source-list"></div>
+          </div>
+        </section>
+
+        <section id="sources" class="section-grid two-column">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Sources</p>
+                <h3>最新核验来源</h3>
+              </div>
+            </div>
+            <div id="sourceList" class="source-list"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Kill Criteria</p>
+                <h3>撤退条件</h3>
+              </div>
+            </div>
+            <div id="killCriteria" class="action-list"></div>
+          </div>
+        </section>
+
+        <section id="risk" class="section-grid two-column">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Risk Register</p>
+                <h3>组合风险摘要</h3>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>风险项</th>
+                    <th>等级</th>
+                    <th>数值</th>
+                    <th>状态</th>
+                  </tr>
+                </thead>
+                <tbody id="riskTable"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Scores</p>
+                <h3>单票状态</h3>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ticker</th>
+                    <th>评分</th>
+                    <th>动作</th>
+                    <th>证据</th>
+                  </tr>
+                </thead>
+                <tbody id="scoreTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="positions" class="section-grid two-column wide-left">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Daily Snapshot</p>
+                <h3>每日仓位快照</h3>
+              </div>
+              <button id="saveSnapshot" class="button primary" type="button">记录快照</button>
+            </div>
+            <div class="form-grid compact">
+              <label>
+                日期
+                <input id="snapshotDate" type="date" />
+              </label>
+              <label>
+                现金
+                <input id="cashInput" type="number" step="0.01" min="0" placeholder="0.00" />
+              </label>
+              <label>
+                记录人
+                <input id="operatorInput" type="text" placeholder="manual" />
+              </label>
+            </div>
+            <div class="table-wrap position-editor">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ticker</th>
+                    <th>目标</th>
+                    <th>价格</th>
+                    <th>股数</th>
+                    <th>成本</th>
+                    <th>当前权重</th>
+                  </tr>
+                </thead>
+                <tbody id="positionEditor"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Trade Log</p>
+                <h3>仓位变化记录</h3>
+              </div>
+              <button id="addChange" class="button secondary" type="button">新增</button>
+            </div>
+            <form id="changeForm" class="stack-form">
+              <label>
+                日期
+                <input name="date" type="date" required />
+              </label>
+              <label>
+                标的
+                <select name="ticker" required></select>
+              </label>
+              <label>
+                类型
+                <select name="changeType" required>
+                  <option value="buy_review">加仓复核</option>
+                  <option value="sell_review">减仓复核</option>
+                  <option value="rebalance_review">再平衡复核</option>
+                  <option value="cash_change">现金变化</option>
+                  <option value="note_only">仅记录</option>
+                </select>
+              </label>
+              <div class="form-grid compact">
+                <label>
+                  股数变化
+                  <input name="shareDelta" type="number" step="0.0001" placeholder="0" />
+                </label>
+                <label>
+                  成交/参考价
+                  <input name="price" type="number" step="0.01" placeholder="0.00" />
+                </label>
+              </div>
+              <label>
+                原因
+                <input name="reason" type="text" placeholder="事件复核、再平衡、风控..." />
+              </label>
+              <label>
+                备注
+                <textarea name="notes" rows="4"></textarea>
+              </label>
+              <button class="button primary full" type="submit">保存记录</button>
+            </form>
+          </div>
+        </section>
+
+        <section id="reviews" class="section-grid two-column">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">History</p>
+                <h3>仓位历史</h3>
+              </div>
+              <button id="clearRecords" class="button danger" type="button">清空</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>日期</th>
+                    <th>类型</th>
+                    <th>摘要</th>
+                    <th>组合市值</th>
+                  </tr>
+                </thead>
+                <tbody id="historyTable"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Review Notes</p>
+                <h3>复盘记录</h3>
+              </div>
+              <button id="saveReview" class="button primary" type="button">保存复盘</button>
+            </div>
+            <div class="stack-form">
+              <label>
+                复盘日期
+                <input id="reviewDate" type="date" />
+              </label>
+              <label>
+                复盘主题
+                <input id="reviewTitle" type="text" placeholder="NVDA 财报后复盘" />
+              </label>
+              <label>
+                结论
+                <select id="reviewConclusion">
+                  <option value="thesis_unchanged">thesis_unchanged</option>
+                  <option value="thesis_strengthened">thesis_strengthened</option>
+                  <option value="thesis_weakened">thesis_weakened</option>
+                  <option value="thesis_broken_pending_confirmation">thesis_broken_pending_confirmation</option>
+                </select>
+              </label>
+              <label>
+                内容
+                <textarea id="reviewBody" rows="8"></textarea>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <section id="events" class="section-grid">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Calendar</p>
+                <h3>未来事件</h3>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>日期</th>
+                    <th>ticker</th>
+                    <th>类型</th>
+                    <th>事件</th>
+                    <th>状态</th>
+                  </tr>
+                </thead>
+                <tbody id="eventTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="reports" class="section-grid">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Reports</p>
+                <h3>报告入口</h3>
+              </div>
+            </div>
+            <div class="report-grid">
+              <a class="report-link" href="../reports/daily/latest_daily_report.md" target="_blank" rel="noreferrer">
+                <span>日报</span>
+                <strong>latest_daily_report.md</strong>
+              </a>
+              <a class="report-link" href="../reports/weekly/latest_weekly_report.md" target="_blank" rel="noreferrer">
+                <span>周报</span>
+                <strong>latest_weekly_report.md</strong>
+              </a>
+              <a class="report-link" href="../reports/event/latest_event_report.md" target="_blank" rel="noreferrer">
+                <span>事件</span>
+                <strong>latest_event_report.md</strong>
+              </a>
+              <a class="report-link" href="../reports/event/20260519_physical_ai_us_judgment.md" target="_blank" rel="noreferrer">
+                <span>主题</span>
+                <strong>physical_ai_us_judgment.md</strong>
+              </a>
+              <a class="report-link" href="../docs/scb_may_2026_allocation_intake.md" target="_blank" rel="noreferrer">
+                <span>外部线索</span>
+                <strong>SCB May 2026 intake</strong>
+              </a>
+              <a class="report-link" href="../docs/meeting_notes_20260520_ai_semis_platforms_intake.md" target="_blank" rel="noreferrer">
+                <span>会议纪要</span>
+                <strong>AI semis / platforms intake</strong>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

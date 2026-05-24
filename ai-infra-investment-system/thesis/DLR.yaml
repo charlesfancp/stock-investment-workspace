@@ -1,0 +1,32 @@
+ticker: DLR
+role: 带电容量与数据中心地产
+target_weight: 2
+base_case_probability: null
+bull_case_probability: null
+bear_case_probability: null
+buy_thesis:
+  - 带电容量稀缺支撑数据中心地产定价。
+  - AI 训练和推理需求提升长期租赁需求。
+  - REIT 属性提供组合中的地产基础设施暴露。
+key_metrics:
+  - leasing_backlog
+  - renewal_spreads
+  - development_pipeline
+  - financing_cost
+  - occupancy
+add_conditions:
+  - leasing_backlog_expands: true
+  - financing_cost_stable: true
+reduce_conditions:
+  - leasing_backlog_decline: true
+  - financing_cost_spike: true
+  - development_delay: true
+stop_loss:
+  price: null
+targets:
+  first: null
+  second: null
+reversal_triggers:
+  - leasing_backlog_decline
+  - financing_cost_spike
+  - development_delay

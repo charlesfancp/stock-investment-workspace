@@ -1,0 +1,61 @@
+scoring_model:
+  delivery_momentum:
+    weight: 25
+    description: 车型销量动能
+    checks:
+      - 月度交付
+      - 同比增速
+      - 环比增速
+      - 新车型订单
+      - 产品结构
+      - 是否靠降价换量
+  financial_quality:
+    weight: 20
+    description: 财务质量与现金流
+    checks:
+      - 车辆毛利率
+      - 综合毛利率
+      - 经营利润率
+      - 净利润
+      - 经营现金流
+      - 自由现金流
+      - 现金储备
+  ai_robotics_execution:
+    weight: 20
+    description: AI/机器人/具身智能兑现度
+    checks:
+      - 智驾技术进展
+      - VLA / 端到端 / 大模型进展
+      - 机器人产品进展
+      - Robotaxi进展
+      - 真实商业化场景
+      - 是否产生收入或订单
+  business_quality_moat:
+    weight: 15
+    description: 商业质量与护城河
+    checks:
+      - 品牌定位
+      - 用户心智
+      - 定价权
+      - 渠道能力
+      - 海外化能力
+      - 供应链能力
+  valuation_expectation_gap:
+    weight: 10
+    description: 估值与市场预期差
+    checks:
+      - 股价位置
+      - 市值
+      - EV/S
+      - 市场共识目标价
+      - 叙事是否被市场充分定价
+  catalysts_risks:
+    weight: 10
+    description: 催化剂与风险
+    checks:
+      - 财报
+      - 月度交付
+      - 新车发布
+      - 机器人节点
+      - 管理层表态
+      - 政策与价格战

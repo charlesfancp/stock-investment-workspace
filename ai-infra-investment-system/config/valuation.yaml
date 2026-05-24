@@ -1,0 +1,175 @@
+schema_version: 1
+maintenance_mode: manual_confirmed_only
+notes: Scripts may read this file and generate CSV outputs, but must not infer valuation conclusions or edit this file automatically.
+
+metrics:
+  - ticker: NVDA
+    market_cap: "5492973 USDm"
+    pe_ttm: "45.06"
+    pe_forward: "26.41"
+    ev_sales: null
+    fcf_yield: "1.78%"
+    valuation_percentile: "17, internal percentile of current forward PE versus StockAnalysis FY2022-FY2026 forward PE history; lower percentile means cheaper versus own listed history"
+    analyst_target_price_median: null
+    upside_to_target: null
+    valuation_commentary: "Forward PE is below the listed FY2022-FY2026 range midpoint, but absolute market cap and low FCF yield leave high execution sensitivity before FY2027Q1 earnings."
+    source: StockAnalysis NVDA financial ratios
+    source_url: https://stockanalysis.com/stocks/nvda/financials/ratios/
+    source_tier: tier_2
+    source_type: secondary
+    source_date: 2026-05-13
+    verified_status: verified
+    notes: "估值分位为本系统临时模型口径，不是 StockAnalysis 原始字段；待后续用统一历史分位模型替换。"
+  - ticker: TSM
+    market_cap: "1900000 USDm"
+    pe_ttm: "31.76"
+    pe_forward: "22.06"
+    ev_sales: null
+    fcf_yield: "1.83%"
+    valuation_percentile: "100, internal percentile using current PE versus StockAnalysis listed recent annual PE history"
+    analyst_target_price_median: null
+    upside_to_target: null
+    valuation_commentary: "Current PE sits at the high end of the listed recent history; forward PE remains lower, but capex cycle and Taiwan risk require a higher evidence bar."
+    source: StockAnalysis TSM statistics and financial ratios
+    source_url: https://stockanalysis.com/stocks/tsm/statistics/
+    source_tier: tier_2
+    source_type: secondary
+    source_date: 2026-05-13
+    verified_status: verified
+    notes: "估值分位为本系统临时模型口径；TSM ADR 与台股普通股口径需在正式模型中单独校准。"
+  - ticker: AVGO
+    market_cap: "1980000 USDm"
+    pe_ttm: "81.72"
+    pe_forward: "31.17"
+    ev_sales: "29.69"
+    fcf_yield: "1.50%"
+    valuation_percentile: "83, internal percentile of current forward PE versus StockAnalysis FY2022-FY2026 forward PE history"
+    analyst_target_price_median: null
+    upside_to_target: null
+    valuation_commentary: "Forward PE is elevated versus most listed history and FCF yield is thin; valuation requires AI ASIC/networking revenue acceleration to continue."
+    source: StockAnalysis AVGO statistics and financial ratios
+    source_url: https://stockanalysis.com/stocks/avgo/statistics/
+    source_tier: tier_2
+    source_type: secondary
+    source_date: 2026-05-13
+    verified_status: verified
+    notes: "估值分位为本系统临时模型口径，不是外部原始字段。"
+  - ticker: GOOGL
+    market_cap: "4820000 USDm"
+    pe_ttm: "30.37"
+    pe_forward: "31.74"
+    ev_sales: null
+    fcf_yield: "1.34%"
+    valuation_percentile: "100, internal percentile of current forward PE versus StockAnalysis FY2022-FY2026 forward PE history"
+    analyst_target_price_median: null
+    upside_to_target: null
+    valuation_commentary: "Multiple has expanded to the top of the listed recent forward-PE history while FCF yield is compressed by AI capex; Cloud backlog is the key offsetting evidence."
+    source: StockAnalysis GOOGL statistics and financial ratios
+    source_url: https://stockanalysis.com/stocks/googl/statistics/
+    source_tier: tier_2
+    source_type: secondary
+    source_date: 2026-05-07
+    verified_status: verified
+    notes: "估值分位为本系统临时模型口径；Class A/GOOGL 与 GOOG 口径需在正式市场数据层统一。"
+  - ticker: AMZN
+    market_cap: "2920000 USDm"
+    pe_ttm: "32.89"
+    pe_forward: "32.87"
+    ev_sales: null
+    fcf_yield: "-0.08%"
+    valuation_percentile: "33, internal percentile of current forward PE versus StockAnalysis FY2022-FY2026 forward PE history"
+    analyst_target_price_median: null
+    upside_to_target: null
+    valuation_commentary: "Forward PE is not extreme versus listed history, but FCF yield is negative under current heavy AI/logistics capex, so valuation support depends on AWS growth and capex conversion."
+    source: StockAnalysis AMZN financial ratios
+    source_url: https://stockanalysis.com/stocks/amzn/financials/ratios/
+    source_tier: tier_2
+    source_type: secondary
+    source_date: 2026-05-07
+    verified_status: verified
+    notes: "估值分位为本系统临时模型口径；AMZN FCF yield is affected by finance leases and elevated infrastructure spending."
+  - ticker: MU
+    market_cap: null
+    pe_ttm: null
+    pe_forward: null
+    ev_sales: null
+    fcf_yield: null
+    valuation_percentile: null
+    analyst_target_price_median: null
+    upside_to_target: null
+    valuation_commentary: null
+    source: null
+    source_url: null
+    source_tier: null
+    source_type: null
+    source_date: null
+    verified_status: null
+    notes: Fill manually from company filings, exchange data, or trusted market data sources.
+  - ticker: GEV
+    market_cap: null
+    pe_ttm: null
+    pe_forward: null
+    ev_sales: null
+    fcf_yield: null
+    valuation_percentile: null
+    analyst_target_price_median: null
+    upside_to_target: null
+    valuation_commentary: null
+    source: null
+    source_url: null
+    source_tier: null
+    source_type: null
+    source_date: null
+    verified_status: null
+    notes: Fill manually from company filings, exchange data, or trusted market data sources.
+  - ticker: VRT
+    market_cap: null
+    pe_ttm: null
+    pe_forward: null
+    ev_sales: null
+    fcf_yield: null
+    valuation_percentile: null
+    analyst_target_price_median: null
+    upside_to_target: null
+    valuation_commentary: null
+    source: null
+    source_url: null
+    source_tier: null
+    source_type: null
+    source_date: null
+    verified_status: null
+    notes: Fill manually from company filings, exchange data, or trusted market data sources.
+  - ticker: ETN
+    market_cap: null
+    pe_ttm: null
+    pe_forward: null
+    ev_sales: null
+    fcf_yield: null
+    valuation_percentile: null
+    analyst_target_price_median: null
+    upside_to_target: null
+    valuation_commentary: null
+    source: null
+    source_url: null
+    source_tier: null
+    source_type: null
+    source_date: null
+    verified_status: null
+    notes: Fill manually from company filings, exchange data, or trusted market data sources.
+  - ticker: DLR
+    market_cap: null
+    pe_ttm: null
+    pe_forward: null
+    ev_sales: null
+    fcf_yield: null
+    valuation_percentile: null
+    analyst_target_price_median: null
+    upside_to_target: null
+    valuation_commentary: null
+    source: null
+    source_url: null
+    source_tier: null
+    source_type: null
+    source_date: null
+    verified_status: null
+    notes: Fill manually from company filings, exchange data, or trusted market data sources.

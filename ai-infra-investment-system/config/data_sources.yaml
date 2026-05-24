@@ -1,0 +1,118 @@
+source_tiers:
+  tier_1:
+    name: 高可信数据
+    description: 可直接用于正式投资判断，但仍需保留来源、日期和抓取时间。
+    allowed_uses:
+      - thesis_validation
+      - scoring_inputs
+      - risk_trigger_confirmation
+      - daily_report_core_facts
+    examples:
+      - SEC filings
+      - company earnings releases
+      - investor presentations
+      - official earnings call transcripts
+      - company IR news releases
+      - exchange price data
+      - official regulatory disclosures
+
+  tier_2:
+    name: 辅助验证数据
+    description: 可用于验证趋势、补充背景和交叉检查，但不应单独作为重大投资动作依据。
+    allowed_uses:
+      - trend_verification
+      - industry_context
+      - event_background
+      - secondary_confirmation
+    examples:
+      - Reuters
+      - Bloomberg
+      - Wall Street Journal
+      - Barrons
+      - CNBC
+      - Gartner
+      - IDC
+      - TrendForce
+      - IEA
+      - S&P Global
+      - SemiAnalysis
+
+  tier_3:
+    name: 低可信线索数据
+    description: 只能作为线索和待核查事项，不能直接进入结论、评分或交易建议。
+    allowed_uses:
+      - research_leads
+      - verification_queue
+      - rumor_watch
+    prohibited_uses:
+      - scoring_inputs
+      - risk_trigger_confirmation
+      - direct_action_recommendation
+    examples:
+      - social media
+      - Reddit
+      - X
+      - YouTube
+      - unsourced blogs
+      - screenshots_without_source
+      - forums
+      - market rumors
+
+data_quality_rules:
+  require_source: true
+  require_date: true
+  require_fetched_at: true
+  stale_threshold_days: 90
+  stale_label_required: true
+  search_result_is_not_fact: true
+  second_verification_required_for_tier_2: true
+  tier_3_never_directly_changes_score: true
+  missing_field_value: null
+  no_fabrication: true
+
+judgment_rules:
+  formal_judgment_requires:
+    - ticker
+    - claim
+    - source
+    - source_tier
+    - source_date
+    - fetched_at
+  thesis_break_requires_tier_1_or_two_independent_tier_2_sources: true
+  report_missing_data_explicitly: true
+  human_confirmation_required_for_trade: true
+
+preferred_sources_by_topic:
+  prices:
+    preferred_tier: tier_1
+    examples:
+      - exchange price data
+      - Yahoo Finance as temporary engineering source
+      - Polygon
+      - Tiingo
+      - Financial Modeling Prep
+  filings:
+    preferred_tier: tier_1
+    examples:
+      - SEC EDGAR
+      - company IR
+  earnings:
+    preferred_tier: tier_1
+    examples:
+      - company earnings releases
+      - official transcripts
+      - investor presentations
+  industry:
+    preferred_tier: tier_2
+    examples:
+      - Gartner
+      - IDC
+      - TrendForce
+      - IEA
+      - Reuters
+  risk_events:
+    preferred_tier: tier_1
+    examples:
+      - regulatory filings
+      - official agency announcements
+      - company disclosures

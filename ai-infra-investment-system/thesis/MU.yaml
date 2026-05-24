@@ -1,0 +1,32 @@
+ticker: MU
+role: HBM 瓶颈建材
+target_weight: 8
+base_case_probability: null
+bull_case_probability: null
+bear_case_probability: null
+buy_thesis:
+  - HBM 供需紧张提升存储周期弹性。
+  - AI 服务器带动高端 DRAM 和 NAND 需求。
+  - 周期上行时利润弹性高。
+key_metrics:
+  - hbm_revenue
+  - hbm_pricing
+  - gross_margin
+  - inventory_days
+  - capex_and_supply_commentary
+add_conditions:
+  - hbm_pricing_stable_or_rising: true
+  - inventory_normalizing: true
+reduce_conditions:
+  - hbm_price_decline: true
+  - inventory_build: true
+  - samsung_hbm_supply_surge: true
+stop_loss:
+  price: null
+targets:
+  first: null
+  second: null
+reversal_triggers:
+  - hbm_price_decline
+  - inventory_build
+  - samsung_hbm_supply_surge

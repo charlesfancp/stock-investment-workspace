@@ -1,0 +1,35 @@
+stale_after_days: 92
+score_dimensions:
+  search_moat:
+    label: Search 护城河
+    max_score: 25
+    metrics:
+      - search_revenue_growth_yoy_pct
+      - search_operating_margin_pct
+      - search_market_share_pct
+  cloud_second_curve:
+    label: Cloud 第二曲线
+    max_score: 35
+    metrics:
+      - cloud_revenue_growth_yoy_pct
+      - cloud_operating_margin_pct
+      - cloud_backlog_growth_yoy_pct
+  ai_roi_fcf:
+    label: AI ROI / FCF
+    max_score: 25
+    metrics:
+      - fcf_margin_pct
+      - capex_to_revenue_pct
+      - ai_capex_roi_comment_score
+  valuation_position:
+    label: 估值与仓位
+    max_score: 15
+    metrics:
+      - forward_pe
+      - fcf_yield_pct
+      - rr_ratio
+recommendations:
+  buy: 82
+  add: 72
+  hold: 55
+  reduce: 40

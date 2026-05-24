@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+venv/
+
+# Optional local account inputs.
+config/positions.local.yaml
+
+# Generated research outputs are kept locally or uploaded as CI artifacts.
+data/processed/*.csv
+data/snapshots/*.csv
+reports/daily/*.md
+reports/weekly/*.md
+reports/event/*.md
+
+!data/processed/.gitkeep
+!data/snapshots/.gitkeep
+!reports/daily/.gitkeep
+!reports/weekly/.gitkeep
+!reports/event/.gitkeep

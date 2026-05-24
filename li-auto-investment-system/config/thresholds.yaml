@@ -1,0 +1,40 @@
+action_thresholds:
+  strong_buy_core:
+    score_min: 80
+    action: 强买 / 加到核心仓
+  buy_add:
+    score_min: 70
+    score_max: 79
+    action: 买入 / 加仓
+  observation_position:
+    score_min: 60
+    score_max: 69
+    action: 观察仓 / 小仓试探
+  track_no_buy:
+    score_min: 50
+    score_max: 59
+    action: 继续跟踪，不买
+  avoid_reduce:
+    score_max: 49
+    action: 回避 / 减仓
+
+relative_rules:
+  overweight_gap: 10
+  if_xpev_minus_li_gte_10: 超配 XPEV
+  if_li_minus_xpev_gte_10: 超配 LI
+  if_abs_gap_lt_10: 双标的均衡或略偏高弹性
+  if_both_below_60: 两者都不买，只跟踪
+
+portfolio_rules:
+  li_ge_80_xpev_lt_70: "LI 10%-12%, XPEV 0%-3%"
+  xpev_ge_80_li_lt_70: "XPEV 10%-12%, LI 0%-3%"
+  both_ge_75: "合计 18%-25%"
+  both_65_75: "合计 10%-15%"
+  both_55_65: "合计 0%-5%"
+  both_lt_55: "0%"
+
+pre_earnings_guardrails:
+  before_2026_05_28:
+    max_li_position: "0%-3%"
+    max_xpev_position: "0%-3%"
+    rule: Q1财报前不主动加仓；观察仓只用于跟踪，不构成交易指令

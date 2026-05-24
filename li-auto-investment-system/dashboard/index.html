@@ -1,0 +1,1090 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LI vs XPEV 投资决策工作台</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --panel: #fff;
+      --ink: #17202a;
+      --muted: #64707d;
+      --line: #d9dfe7;
+      --blue: #245a91;
+      --green: #087650;
+      --amber: #a76304;
+      --red: #a33a37;
+      --soft-blue: #e8f0f8;
+      --soft-green: #e4f2eb;
+      --soft-amber: #f6ead5;
+      --soft-red: #f5dfdf;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.48;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    button {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 0 12px;
+      cursor: pointer;
+    }
+
+    button.primary {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #fff;
+    }
+
+    button.danger {
+      border-color: var(--red);
+      color: var(--red);
+      background: #fff;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      padding: 9px 10px;
+      min-height: 38px;
+    }
+
+    textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap {
+      width: min(1220px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .topbar h1 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .top-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .muted { color: var(--muted); font-size: 13px; }
+
+    main { padding: 18px 0 38px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+
+    .panel, .metric, .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .panel { padding: 18px; min-width: 0; }
+    .metric { padding: 14px; min-height: 96px; }
+
+    h2 { margin: 0 0 12px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 15px; letter-spacing: 0; }
+    p { margin: 0; }
+
+    .metric span, label, .label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .decision-band {
+      border-left: 4px solid var(--amber);
+      background: #fffaf1;
+      padding: 16px;
+      border-radius: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      background: #eef2f6;
+      color: #334050;
+    }
+
+    .pill.green { background: var(--soft-green); color: var(--green); }
+    .pill.amber { background: var(--soft-amber); color: var(--amber); }
+    .pill.red { background: var(--soft-red); color: var(--red); }
+    .pill.blue { background: var(--soft-blue); color: var(--blue); }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card { padding: 14px; min-width: 0; }
+
+    .score-card { border-top: 4px solid var(--blue); }
+    .score-card.xpev { border-top-color: var(--green); }
+
+    .score-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .score {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .score small { font-size: 16px; color: var(--muted); }
+
+    .bars {
+      display: grid;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 108px 1fr 38px;
+      gap: 8px;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .bar {
+      height: 9px;
+      border-radius: 999px;
+      background: #e7ebf0;
+      overflow: hidden;
+    }
+
+    .bar i {
+      display: block;
+      height: 100%;
+      background: var(--blue);
+    }
+
+    .xpev .bar i { background: var(--green); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--muted);
+      background: #f9fafb;
+    }
+
+    .wide { overflow-x: auto; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .form-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .form-grid .full { grid-column: 1 / -1; }
+
+    .position-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .mini {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: #fafbfc;
+    }
+
+    .mini strong {
+      display: block;
+      font-size: 18px;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 8px;
+    }
+
+    .check-item {
+      display: grid;
+      grid-template-columns: 22px 1fr auto;
+      gap: 8px;
+      align-items: start;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fafbfc;
+    }
+
+    .check-item input { width: auto; min-height: auto; margin-top: 3px; }
+
+    .log-list {
+      display: grid;
+      gap: 10px;
+      max-height: 340px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .log-entry {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: #fafbfc;
+    }
+
+    .log-entry time {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .status-line {
+      margin-top: 8px;
+      min-height: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: 12px;
+      padding: 8px 0 30px;
+    }
+
+    @media (max-width: 940px) {
+      .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-12 {
+        grid-column: span 12;
+      }
+      .cards, .form-grid, .form-grid.two, .position-summary {
+        grid-template-columns: 1fr;
+      }
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .top-actions { justify-content: flex-start; }
+    }
+
+    @media (max-width: 620px) {
+      .wrap { width: min(100% - 20px, 1220px); }
+      .metric { min-height: auto; }
+      .bar-row { grid-template-columns: 1fr; }
+      button { width: 100%; }
+      .top-actions { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <div>
+        <h1>LI vs XPEV 投资决策工作台</h1>
+        <p class="muted" id="dataMeta">正在读取数据...</p>
+      </div>
+      <div class="top-actions">
+        <button class="primary" id="refreshBtn">刷新数据</button>
+        <button id="saveBtn">保存仓位</button>
+        <button id="exportBtn">导出日志</button>
+        <button class="danger" id="resetBtn">清空本地记录</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid">
+      <div class="panel span-8">
+        <h2>当前总判断</h2>
+        <div class="decision-band">
+          <h3 id="currentDecision">读取中</h3>
+          <p id="decisionNote">当前页面只记录研究建议，不执行真实交易。</p>
+          <p class="status-line" id="statusLine"></p>
+        </div>
+      </div>
+      <div class="metric span-4">
+        <span>下一复核点</span>
+        <strong id="nextReviewDate">--</strong>
+        <p class="muted" id="nextReviewEvent">--</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="metric span-3">
+        <span>LI评分</span>
+        <strong id="liScoreTop">--/100</strong>
+      </div>
+      <div class="metric span-3">
+        <span>XPEV评分</span>
+        <strong id="xpevScoreTop">--/100</strong>
+      </div>
+      <div class="metric span-3">
+        <span>当前建议仓位</span>
+        <strong id="positionTop">--</strong>
+      </div>
+      <div class="metric span-3">
+        <span>当前动作</span>
+        <strong id="actionTop">继续跟踪</strong>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel span-12">
+        <h2>股价与市值</h2>
+        <div class="cards">
+          <article class="card" id="liPriceCard">
+            <div class="score-head">
+              <div>
+                <h3>LI / Nasdaq</h3>
+                <p class="muted" id="liPriceTime">--</p>
+              </div>
+              <div class="score" id="liPrice">--</div>
+            </div>
+            <table>
+              <tbody>
+                <tr><th>涨跌</th><td id="liChange">--</td></tr>
+                <tr><th>日内区间</th><td id="liRange">--</td></tr>
+                <tr><th>成交量</th><td id="liVolume">--</td></tr>
+                <tr><th>市值</th><td id="liMarketCap">--</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="card" id="xpevPriceCard">
+            <div class="score-head">
+              <div>
+                <h3>XPEV / NYSE</h3>
+                <p class="muted" id="xpevPriceTime">--</p>
+              </div>
+              <div class="score" id="xpevPrice">--</div>
+            </div>
+            <table>
+              <tbody>
+                <tr><th>涨跌</th><td id="xpevChange">--</td></tr>
+                <tr><th>日内区间</th><td id="xpevRange">--</td></tr>
+                <tr><th>成交量</th><td id="xpevVolume">--</td></tr>
+                <tr><th>市值</th><td id="xpevMarketCap">--</td></tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+        <p class="status-line" id="priceStatus">股价为盘中或延迟行情；交易前必须重新核实。</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel span-7">
+        <h2>仓位配置</h2>
+        <div class="form-grid">
+          <div>
+            <label for="liPosition">LI 当前研究仓位 %</label>
+            <input id="liPosition" type="number" min="0" max="100" step="0.5">
+          </div>
+          <div>
+            <label for="xpevPosition">XPEV 当前研究仓位 %</label>
+            <input id="xpevPosition" type="number" min="0" max="100" step="0.5">
+          </div>
+          <div>
+            <label for="cashPosition">现金 %</label>
+            <input id="cashPosition" type="number" min="0" max="100" step="0.5">
+          </div>
+          <div>
+            <label for="maxThemePosition">双标的主题仓上限 %</label>
+            <input id="maxThemePosition" type="number" min="0" max="100" step="0.5">
+          </div>
+          <div>
+            <label for="preferredTicker">当前偏好</label>
+            <select id="preferredTicker">
+              <option value="neutral">均衡观察</option>
+              <option value="LI">偏LI</option>
+              <option value="XPEV">偏XPEV</option>
+              <option value="cash">偏现金</option>
+            </select>
+          </div>
+          <div>
+            <label for="riskMode">风险模式</label>
+            <select id="riskMode">
+              <option value="strict">严格：财报前不加仓</option>
+              <option value="watch">观察：允许0%-3%</option>
+              <option value="active">主动：财报后可加仓</option>
+            </select>
+          </div>
+        </div>
+        <div class="position-summary">
+          <div class="mini"><span class="label">组合合计</span><strong id="totalPosition">0%</strong></div>
+          <div class="mini"><span class="label">现金约束</span><strong id="cashCheck">--</strong></div>
+          <div class="mini"><span class="label">系统建议</span><strong id="positionAdvice">--</strong></div>
+        </div>
+      </div>
+
+      <div class="panel span-5">
+        <h2>加仓 / 减仓模拟</h2>
+        <div class="form-grid two">
+          <div>
+            <label for="actionTicker">标的</label>
+            <select id="actionTicker">
+              <option value="LI">LI</option>
+              <option value="XPEV">XPEV</option>
+              <option value="BOTH">双标的</option>
+              <option value="CASH">现金/回避</option>
+            </select>
+          </div>
+          <div>
+            <label for="actionType">动作</label>
+            <select id="actionType">
+              <option value="继续跟踪">继续跟踪</option>
+              <option value="小仓试买">小仓试买</option>
+              <option value="加仓">加仓</option>
+              <option value="减仓">减仓</option>
+              <option value="清仓">清仓</option>
+              <option value="两者回避">两者回避</option>
+            </select>
+          </div>
+          <div>
+            <label for="targetPosition">目标仓位 %</label>
+            <input id="targetPosition" type="number" min="0" max="100" step="0.5" value="0">
+          </div>
+          <div>
+            <label for="reviewDate">下次复盘日期</label>
+            <input id="reviewDate" type="date" value="2026-05-28">
+          </div>
+          <div class="full">
+            <label for="actionReason">动作理由 / 证据编号</label>
+            <textarea id="actionReason" placeholder="例如：Q1财报前不加仓；等待LI毛利率>=17%、XPEV毛利率>=13%验证。"></textarea>
+          </div>
+        </div>
+        <div class="top-actions" style="justify-content:flex-start;margin-top:12px">
+          <button class="primary" id="recordActionBtn">记录动作</button>
+          <button id="applyActionBtn">应用到仓位</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel span-8">
+        <h2>评分与相对决策</h2>
+        <div class="cards">
+          <article class="card score-card" id="liScoreCard">
+            <div class="score-head">
+              <div>
+                <h3>LI / 理想汽车</h3>
+                <p class="muted" id="liRating">--</p>
+              </div>
+              <div class="score" id="liScore">--<small>/100</small></div>
+            </div>
+            <div class="bars" id="liBars"></div>
+          </article>
+          <article class="card score-card xpev" id="xpevScoreCard">
+            <div class="score-head">
+              <div>
+                <h3>XPEV / 小鹏汽车</h3>
+                <p class="muted" id="xpevRating">--</p>
+              </div>
+              <div class="score" id="xpevScore">--<small>/100</small></div>
+            </div>
+            <div class="bars xpev" id="xpevBars"></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="panel span-4">
+        <h2>触发条件检查</h2>
+        <div class="checklist" id="triggerChecklist"></div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel span-7">
+        <h2>复盘记录</h2>
+        <div class="form-grid two">
+          <div>
+            <label for="reviewType">复盘类型</label>
+            <select id="reviewType">
+              <option value="日常复盘">日常复盘</option>
+              <option value="财报复盘">财报复盘</option>
+              <option value="30天复盘">30天复盘</option>
+              <option value="60天复盘">60天复盘</option>
+              <option value="90天复盘">90天复盘</option>
+            </select>
+          </div>
+          <div>
+            <label for="reviewOutcome">过程判断</label>
+            <select id="reviewOutcome">
+              <option value="待验证">待验证</option>
+              <option value="判断正确">判断正确</option>
+              <option value="判断错误">判断错误</option>
+              <option value="过程正确但结果不好">过程正确但结果不好</option>
+              <option value="结果好但过程错误">结果好但过程错误</option>
+            </select>
+          </div>
+          <div class="full">
+            <label for="reviewText">复盘内容</label>
+            <textarea id="reviewText" placeholder="记录新证据、原判断是否被验证、需要上修/下修的地方。"></textarea>
+          </div>
+        </div>
+        <div class="top-actions" style="justify-content:flex-start;margin-top:12px">
+          <button class="primary" id="recordReviewBtn">记录复盘</button>
+        </div>
+      </div>
+
+      <div class="panel span-5">
+        <h2>本地日志</h2>
+        <div class="log-list" id="logList"></div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel span-8">
+        <h2>LI vs XPEV 核心对比</h2>
+        <div class="wide">
+          <table>
+            <thead><tr><th>维度</th><th>LI</th><th>XPEV</th><th>当前优先</th></tr></thead>
+            <tbody>
+              <tr><td>2026Q1交付</td><td>95,142辆，超过指引上限</td><td>62,682辆，落在指引区间</td><td>LI</td></tr>
+              <tr><td>2026年4月交付</td><td>34,085辆</td><td>31,011辆，环比+13%</td><td>接近</td></tr>
+              <tr><td>2025车辆毛利率</td><td>17.9%</td><td>12.8%</td><td>LI</td></tr>
+              <tr><td>2025利润</td><td>净利润11.394亿元</td><td>净亏损11.4亿元，Q4首次盈利</td><td>LI绝对值，XPEV边际</td></tr>
+              <tr><td>AI/机器人</td><td>L9 Livis刚发布</td><td>VLA 2.0、Robotaxi、IRON路径更完整</td><td>XPEV</td></tr>
+              <tr><td>关键缺口</td><td>Q1毛利率、现金流、L9 Livis订单</td><td>Q1毛利率、MONA占比、IRON收入路径</td><td>并列</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel span-4">
+        <h2>价格纪律</h2>
+        <table>
+          <tbody>
+            <tr><th>买入区间</th><td>暂不设正式买入区间，等待Q1财报后重算。</td></tr>
+            <tr><th>目标价</th><td>暂不设正式目标价；当前缺一致预期和Q1财务数据。</td></tr>
+            <tr><th>止损</th><td>先用基本面止损：Q1毛利率/现金流不达标即降级。</td></tr>
+            <tr><th>R/R</th><td>财报后补估值模型。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>证据状态</h2>
+      <div class="cards">
+        <article class="card">
+          <span class="pill green">LI已核实</span>
+          <h3>交付超指引，但财务待验证</h3>
+          <p>2026Q1交付95,142辆，超过指引上限；Q1毛利率、费用率和现金流尚未发布。</p>
+        </article>
+        <article class="card">
+          <span class="pill green">XPEV已核实</span>
+          <h3>Q4首次盈利，AI路径更强</h3>
+          <p>2025Q4归母净利润3.8亿元；VLA 2.0和IRON构成Physical AI期权，但收入路径未核实。</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>本工作台为研究与决策辅助，不是自动交易系统。仓位、加仓、减仓、清仓均只记录研究建议，不会执行真实交易。</p>
+  </footer>
+
+  <script type="application/json" id="embeddedDashboardData">
+{
+  "updated_at": "2026-05-19",
+  "system": "LI vs XPEV 中国AI汽车 / 具身智能双标的投资决策系统",
+  "current_decision": "LI / XPEV 双持观察；Q1财报前不主动加仓",
+  "next_review": {
+    "date": "2026-05-28",
+    "event": "LI 和 XPEV 2026Q1 财报及电话会"
+  },
+  "portfolio_research_suggestion": {
+    "LI": "0%-3%",
+    "XPEV": "0%-3%",
+    "cash": "94%-100%",
+    "note": "研究建议，不是交易指令；真实交易必须人工确认"
+  },
+  "market_prices": {
+    "LI": {
+      "ticker": "LI",
+      "market": "Nasdaq",
+      "price": 16.03,
+      "currency": "USD",
+      "change": -0.66,
+      "change_pct": -3.954,
+      "open": 15.91,
+      "high": 16.08,
+      "low": 15.84,
+      "volume": 1949422,
+      "market_cap": 31423802001,
+      "trade_time": "2026-05-19 13:53:50 UTC",
+      "source": "finance quote",
+      "status": "盘中/延迟行情，需交易前复核"
+    },
+    "XPEV": {
+      "ticker": "XPEV",
+      "market": "NYSE",
+      "price": 14.89,
+      "currency": "USD",
+      "change": -0.17,
+      "change_pct": -1.129,
+      "open": 14.87,
+      "high": 15.08,
+      "low": 14.75,
+      "volume": 723795,
+      "market_cap": 28034004102,
+      "trade_time": "2026-05-19 13:53:53 UTC",
+      "source": "finance quote",
+      "status": "盘中/延迟行情，需交易前复核"
+    }
+  },
+  "scores": {
+    "LI": {
+      "total": 59,
+      "delivery_momentum": 61,
+      "financial_quality": 58,
+      "ai_robotics_execution": 55,
+      "business_quality_moat": 64,
+      "valuation_expectation_gap": 57,
+      "catalysts_risks": 63,
+      "rating": "继续跟踪，不买"
+    },
+    "XPEV": {
+      "total": 63,
+      "delivery_momentum": 57,
+      "financial_quality": 64,
+      "ai_robotics_execution": 70,
+      "business_quality_moat": 61,
+      "valuation_expectation_gap": 60,
+      "catalysts_risks": 65,
+      "rating": "观察仓 / 小仓试探，但Q1财报前不主动加仓"
+    }
+  },
+  "largest_opportunity": {
+    "LI": "L9 Livis推动高端家庭AI移动空间重估",
+    "XPEV": "VLA 2.0 / IRON / Physical AI平台重估"
+  },
+  "largest_risk": {
+    "LI": "毛利率和现金流未随交付修复；L9 Livis订单不强",
+    "XPEV": "MONA低价车型占比过高压低ASP；机器人未进入收入"
+  }
+}
+  </script>
+  <script>
+    const STORE_KEY = "li_xpev_dashboard_state_v2";
+    const DEFAULT_STATE = {
+      positions: {
+        LI: 0,
+        XPEV: 0,
+        cash: 100,
+        maxTheme: 5,
+        preferred: "neutral",
+        riskMode: "strict"
+      },
+      logs: [],
+      checks: {}
+    };
+
+    let appData = null;
+    let state = loadState();
+
+    const scoreLabels = {
+      delivery_momentum: "销量动能",
+      financial_quality: "财务质量",
+      ai_robotics_execution: "AI/机器人",
+      business_quality_moat: "商业质量",
+      valuation_expectation_gap: "估值预期",
+      catalysts_risks: "催化风险"
+    };
+
+    const triggers = [
+      { id: "li_margin_17", ticker: "LI", label: "Q1车辆毛利率 >=17%", type: "上修" },
+      { id: "li_cashflow", ticker: "LI", label: "经营现金流转正或明显改善", type: "上修" },
+      { id: "li_l9_orders", ticker: "LI", label: "L9 Livis订单/交付得到验证", type: "上修" },
+      { id: "li_weak", ticker: "LI", label: "毛利率低于2025Q4且现金流弱", type: "下修" },
+      { id: "xpev_margin_13", ticker: "XPEV", label: "Q1车辆毛利率 >=13%", type: "上修" },
+      { id: "xpev_profit", ticker: "XPEV", label: "盈利延续或亏损明显收窄", type: "上修" },
+      { id: "xpev_ai_path", ticker: "XPEV", label: "VLA/IRON有商业化路径", type: "上修" },
+      { id: "xpev_asp", ticker: "XPEV", label: "MONA占比压低ASP/毛利率", type: "下修" }
+    ];
+
+    function loadState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORE_KEY));
+        return {
+          ...DEFAULT_STATE,
+          ...saved,
+          positions: { ...DEFAULT_STATE.positions, ...(saved && saved.positions) },
+          logs: saved && Array.isArray(saved.logs) ? saved.logs : [],
+          checks: saved && saved.checks ? saved.checks : {}
+        };
+      } catch {
+        return structuredClone(DEFAULT_STATE);
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORE_KEY, JSON.stringify(state));
+      setStatus("已保存到浏览器本地。");
+    }
+
+    function loadEmbeddedData() {
+      const raw = document.getElementById("embeddedDashboardData").textContent;
+      appData = JSON.parse(raw);
+      renderData();
+    }
+
+    async function loadDashboardData() {
+      setStatus("正在刷新 dashboard/data.json ...");
+      if (location.protocol === "file:") {
+        loadEmbeddedData();
+        setStatus("已使用内嵌数据。要读取最新 data.json，请用 http://localhost:5178/dashboard/index.html 打开。");
+        return;
+      }
+      const response = await fetch(`data.json?t=${Date.now()}`, { cache: "no-store" });
+      if (!response.ok) throw new Error(`读取失败：${response.status}`);
+      appData = await response.json();
+      renderData();
+      setStatus("数据已刷新。");
+    }
+
+    function setStatus(message) {
+      document.getElementById("statusLine").textContent = message;
+    }
+
+    function pct(value) {
+      const n = Number(value || 0);
+      return `${Number.isInteger(n) ? n : n.toFixed(1)}%`;
+    }
+
+    function renderData() {
+      if (!appData) return;
+
+      document.getElementById("dataMeta").textContent =
+        `${appData.system} | 数据日期 ${appData.updated_at}`;
+      document.getElementById("currentDecision").textContent = appData.current_decision;
+      document.getElementById("nextReviewDate").textContent = appData.next_review.date;
+      document.getElementById("nextReviewEvent").textContent = appData.next_review.event;
+
+      document.getElementById("liScoreTop").textContent = `${appData.scores.LI.total}/100`;
+      document.getElementById("xpevScoreTop").textContent = `${appData.scores.XPEV.total}/100`;
+      document.getElementById("liScore").innerHTML = `${appData.scores.LI.total}<small>/100</small>`;
+      document.getElementById("xpevScore").innerHTML = `${appData.scores.XPEV.total}<small>/100</small>`;
+      document.getElementById("liRating").textContent = appData.scores.LI.rating;
+      document.getElementById("xpevRating").textContent = appData.scores.XPEV.rating;
+
+      renderBars("liBars", appData.scores.LI, "");
+      renderBars("xpevBars", appData.scores.XPEV, "xpev");
+      renderMarketPrices();
+      renderPositions();
+      renderTriggers();
+      renderLogs();
+      updateActionSuggestion();
+    }
+
+    function renderMarketPrices() {
+      if (!appData.market_prices) return;
+      renderPrice("li", appData.market_prices.LI);
+      renderPrice("xpev", appData.market_prices.XPEV);
+      const liTime = appData.market_prices.LI && appData.market_prices.LI.trade_time;
+      const xpevTime = appData.market_prices.XPEV && appData.market_prices.XPEV.trade_time;
+      document.getElementById("priceStatus").textContent =
+        `行情状态：盘中/延迟行情，交易前必须复核。LI ${liTime || "--"}；XPEV ${xpevTime || "--"}。`;
+    }
+
+    function renderPrice(prefix, item) {
+      if (!item) return;
+      const changeClass = Number(item.change) >= 0 ? "green" : "red";
+      const sign = Number(item.change) >= 0 ? "+" : "";
+      document.getElementById(`${prefix}Price`).innerHTML =
+        `${item.price.toFixed(2)}<small>${item.currency}</small>`;
+      document.getElementById(`${prefix}PriceTime`).textContent =
+        `${item.trade_time} · ${item.status}`;
+      document.getElementById(`${prefix}Change`).innerHTML =
+        `<span class="pill ${changeClass}">${sign}${item.change.toFixed(2)} / ${sign}${item.change_pct.toFixed(2)}%</span>`;
+      document.getElementById(`${prefix}Range`).textContent =
+        `${item.low.toFixed(2)} - ${item.high.toFixed(2)}，开盘 ${item.open.toFixed(2)}`;
+      document.getElementById(`${prefix}Volume`).textContent =
+        Number(item.volume).toLocaleString("en-US");
+      document.getElementById(`${prefix}MarketCap`).textContent =
+        `${(Number(item.market_cap) / 1e9).toFixed(2)}B ${item.currency}`;
+    }
+
+    function renderBars(containerId, scores) {
+      const rows = Object.entries(scoreLabels).map(([key, label]) => {
+        const value = scores[key] || 0;
+        return `<div class="bar-row"><span>${label}</span><div class="bar"><i style="width:${value}%"></i></div><b>${value}</b></div>`;
+      });
+      document.getElementById(containerId).innerHTML = rows.join("");
+    }
+
+    function renderPositions() {
+      const p = state.positions;
+      document.getElementById("liPosition").value = p.LI;
+      document.getElementById("xpevPosition").value = p.XPEV;
+      document.getElementById("cashPosition").value = p.cash;
+      document.getElementById("maxThemePosition").value = p.maxTheme;
+      document.getElementById("preferredTicker").value = p.preferred;
+      document.getElementById("riskMode").value = p.riskMode;
+
+      const total = Number(p.LI) + Number(p.XPEV);
+      document.getElementById("totalPosition").textContent = pct(total);
+      document.getElementById("cashCheck").textContent = Number(p.cash) >= 0 ? pct(p.cash) : "现金为负";
+      document.getElementById("positionTop").textContent = `LI ${pct(p.LI)} / XPEV ${pct(p.XPEV)}`;
+      document.getElementById("positionAdvice").textContent = getPositionAdvice(total);
+    }
+
+    function getPositionAdvice(total) {
+      const maxTheme = Number(state.positions.maxTheme || 0);
+      if (state.positions.riskMode === "strict" && total > maxTheme) return "超过财报前上限";
+      if (total === 0) return "纯跟踪";
+      if (total <= maxTheme) return "观察仓内";
+      return "需财报后确认";
+    }
+
+    function updatePositionsFromInputs() {
+      const li = Number(document.getElementById("liPosition").value || 0);
+      const xpev = Number(document.getElementById("xpevPosition").value || 0);
+      const cash = Number(document.getElementById("cashPosition").value || 0);
+      state.positions = {
+        LI: li,
+        XPEV: xpev,
+        cash,
+        maxTheme: Number(document.getElementById("maxThemePosition").value || 0),
+        preferred: document.getElementById("preferredTicker").value,
+        riskMode: document.getElementById("riskMode").value
+      };
+      renderPositions();
+      updateActionSuggestion();
+    }
+
+    function updateActionSuggestion() {
+      if (!appData) return;
+      const li = appData.scores.LI.total;
+      const xpev = appData.scores.XPEV.total;
+      const diff = xpev - li;
+      const total = Number(state.positions.LI) + Number(state.positions.XPEV);
+      let action = "继续跟踪";
+      if (li < 60 && xpev < 60) action = "继续跟踪，不买";
+      if (li >= 60 || xpev >= 60) action = "双持观察";
+      if (Math.abs(diff) >= 10) action = diff > 0 ? "超配XPEV候选" : "超配LI候选";
+      if (state.positions.riskMode === "strict") action = "财报前不主动加仓";
+      if (total > Number(state.positions.maxTheme || 0)) action = "减到观察上限";
+      document.getElementById("actionTop").textContent = action;
+    }
+
+    function renderTriggers() {
+      const html = triggers.map(item => {
+        const checked = state.checks[item.id] ? "checked" : "";
+        const cls = item.type === "上修" ? "green" : "red";
+        return `
+          <label class="check-item">
+            <input type="checkbox" data-check="${item.id}" ${checked}>
+            <span><b>${item.ticker}</b> ${item.label}</span>
+            <span class="pill ${cls}">${item.type}</span>
+          </label>
+        `;
+      }).join("");
+      document.getElementById("triggerChecklist").innerHTML = html;
+      document.querySelectorAll("[data-check]").forEach(input => {
+        input.addEventListener("change", event => {
+          state.checks[event.target.dataset.check] = event.target.checked;
+          saveState();
+        });
+      });
+    }
+
+    function addLog(type, payload) {
+      state.logs.unshift({
+        type,
+        created_at: new Date().toISOString(),
+        payload
+      });
+      state.logs = state.logs.slice(0, 100);
+      saveState();
+      renderLogs();
+    }
+
+    function renderLogs() {
+      const list = document.getElementById("logList");
+      if (!state.logs.length) {
+        list.innerHTML = `<p class="muted">还没有本地记录。可以先记录一次仓位动作或复盘。</p>`;
+        return;
+      }
+      list.innerHTML = state.logs.map(entry => {
+        const time = new Date(entry.created_at).toLocaleString("zh-CN");
+        const body = entry.type === "action"
+          ? `${entry.payload.ticker}｜${entry.payload.action}｜目标仓位 ${entry.payload.target}%｜复盘 ${entry.payload.reviewDate}<br>${escapeHtml(entry.payload.reason || "")}`
+          : `${entry.payload.reviewType}｜${entry.payload.outcome}<br>${escapeHtml(entry.payload.text || "")}`;
+        return `<article class="log-entry"><time>${time} · ${entry.type === "action" ? "动作记录" : "复盘记录"}</time><p>${body}</p></article>`;
+      }).join("");
+    }
+
+    function recordAction() {
+      addLog("action", {
+        ticker: document.getElementById("actionTicker").value,
+        action: document.getElementById("actionType").value,
+        target: Number(document.getElementById("targetPosition").value || 0),
+        reviewDate: document.getElementById("reviewDate").value,
+        reason: document.getElementById("actionReason").value
+      });
+    }
+
+    function applyActionToPosition() {
+      const ticker = document.getElementById("actionTicker").value;
+      const target = Number(document.getElementById("targetPosition").value || 0);
+      if (ticker === "LI") state.positions.LI = target;
+      if (ticker === "XPEV") state.positions.XPEV = target;
+      if (ticker === "BOTH") {
+        state.positions.LI = target / 2;
+        state.positions.XPEV = target / 2;
+      }
+      if (ticker === "CASH") {
+        state.positions.LI = 0;
+        state.positions.XPEV = 0;
+      }
+      const total = Number(state.positions.LI) + Number(state.positions.XPEV);
+      state.positions.cash = Math.max(0, 100 - total);
+      saveState();
+      renderPositions();
+      setStatus("已把模拟动作应用到研究仓位。");
+    }
+
+    function recordReview() {
+      addLog("review", {
+        reviewType: document.getElementById("reviewType").value,
+        outcome: document.getElementById("reviewOutcome").value,
+        text: document.getElementById("reviewText").value
+      });
+      document.getElementById("reviewText").value = "";
+    }
+
+    function exportLogs() {
+      const payload = {
+        exported_at: new Date().toISOString(),
+        app_data_updated_at: appData && appData.updated_at,
+        state
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `li-xpev-decision-log-${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function resetLocalState() {
+      if (!confirm("确定清空本地仓位和复盘记录？不会删除项目文件。")) return;
+      localStorage.removeItem(STORE_KEY);
+      state = structuredClone(DEFAULT_STATE);
+      renderData();
+      setStatus("本地记录已清空。");
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    document.getElementById("refreshBtn").addEventListener("click", () => loadDashboardData().catch(err => {
+      loadEmbeddedData();
+      setStatus(`${err.message}；已回退到内嵌数据。`);
+    }));
+    document.getElementById("saveBtn").addEventListener("click", () => { updatePositionsFromInputs(); saveState(); });
+    document.getElementById("exportBtn").addEventListener("click", exportLogs);
+    document.getElementById("resetBtn").addEventListener("click", resetLocalState);
+    document.getElementById("recordActionBtn").addEventListener("click", recordAction);
+    document.getElementById("applyActionBtn").addEventListener("click", applyActionToPosition);
+    document.getElementById("recordReviewBtn").addEventListener("click", recordReview);
+
+    ["liPosition", "xpevPosition", "cashPosition", "maxThemePosition", "preferredTicker", "riskMode"].forEach(id => {
+      document.getElementById(id).addEventListener("input", updatePositionsFromInputs);
+      document.getElementById(id).addEventListener("change", updatePositionsFromInputs);
+    });
+
+    loadDashboardData().catch(err => {
+      loadEmbeddedData();
+      setStatus(`${err.message}；已回退到内嵌数据。`);
+    });
+  </script>
+</body>
+</html>

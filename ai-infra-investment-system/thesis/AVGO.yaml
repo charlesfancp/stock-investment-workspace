@@ -1,0 +1,32 @@
+ticker: AVGO
+role: ASIC/AI 网络地段
+target_weight: 11
+base_case_probability: null
+bull_case_probability: null
+bear_case_probability: null
+buy_thesis:
+  - 定制 ASIC 受益于超大云厂商自研芯片趋势。
+  - AI 网络和互连需求提升 Broadcom 系统价值。
+  - 软件和半导体组合提供现金流稳定性。
+key_metrics:
+  - ai_revenue_growth
+  - custom_asic_project_pipeline
+  - networking_revenue_growth
+  - gross_margin
+  - free_cash_flow
+add_conditions:
+  - ai_revenue_guidance_raised: true
+  - custom_asic_pipeline_expands: true
+reduce_conditions:
+  - ai_revenue_guidance_miss: true
+  - custom_asic_project_delay: true
+  - hyperscaler_customer_loss: true
+stop_loss:
+  price: null
+targets:
+  first: null
+  second: null
+reversal_triggers:
+  - ai_revenue_guidance_miss
+  - custom_asic_project_delay
+  - hyperscaler_customer_loss

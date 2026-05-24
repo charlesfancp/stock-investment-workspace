@@ -1,0 +1,40 @@
+official:
+  hkex:
+    name: HKEXnews
+    url: https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=zh
+    priority: A
+    method: "POST title search by stockId for 01024"
+  kuaishou_ir:
+    name: Kuaishou Technology Investor Relations
+    url: https://ir.kuaishou.com/
+    priority: A
+
+market_data:
+  yahoo_finance:
+    symbol: 1024.HK
+    priority: A
+  manual_market_prices:
+    path: data/processed/market_prices.csv
+    priority: A
+
+broker_and_media:
+  broker_reports:
+    priority: B
+    notes: "Broker opinions must be timestamped and separated from verified facts."
+  business_media:
+    priority: B
+    examples:
+      - Reuters
+      - Bloomberg
+      - Caixin
+      - 36Kr
+      - LatePost
+
+sentiment_only:
+  priority: C
+  examples:
+    - X
+    - Xueqiu
+    - Futu community
+    - Reddit
+    - YouTube

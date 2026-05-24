@@ -1,0 +1,32 @@
+ticker: AMZN
+role: 云地产
+target_weight: 15
+base_case_probability: null
+bull_case_probability: null
+bear_case_probability: null
+buy_thesis:
+  - AWS 是 AI 基础设施主要承载层。
+  - Trainium/Inferentia 可能改善推理成本和客户粘性。
+  - 零售现金流为 AI CapEx 提供资金支持。
+key_metrics:
+  - aws_revenue_growth
+  - aws_operating_margin
+  - capex_growth
+  - free_cash_flow
+  - trainium_customer_adoption
+add_conditions:
+  - aws_growth_accelerates: true
+  - capex_translates_to_cloud_growth: true
+reduce_conditions:
+  - aws_growth_below_20_percent: true
+  - capex_up_but_fcf_down: true
+  - trainium_adoption_miss: true
+stop_loss:
+  price: null
+targets:
+  first: null
+  second: null
+reversal_triggers:
+  - aws_growth_below_20_percent
+  - capex_up_but_fcf_down
+  - trainium_adoption_miss

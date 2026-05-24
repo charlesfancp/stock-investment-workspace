@@ -1,0 +1,32 @@
+ticker: VRT
+role: AI 机房电力与散热
+target_weight: 4
+base_case_probability: null
+bull_case_probability: null
+bear_case_probability: null
+buy_thesis:
+  - AI 机房功率密度提升带来电源和液冷需求。
+  - 超大云厂商数据中心建设支撑订单。
+  - 产品组合从传统机房扩展到高功率 AI 负载。
+key_metrics:
+  - liquid_cooling_orders
+  - data_center_backlog
+  - organic_revenue_growth
+  - adjusted_operating_margin
+  - hyperscaler_commentary
+add_conditions:
+  - liquid_cooling_orders_accelerate: true
+  - margin_expands: true
+reduce_conditions:
+  - liquid_cooling_orders_miss: true
+  - hyperscaler_delay: true
+  - margin_decline: true
+stop_loss:
+  price: null
+targets:
+  first: null
+  second: null
+reversal_triggers:
+  - liquid_cooling_orders_miss
+  - hyperscaler_delay
+  - margin_decline
