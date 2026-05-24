@@ -8,6 +8,7 @@ import json
 import socket
 import socketserver
 import sys
+from datetime import date, datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -71,6 +72,14 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                 append_csv(PROJECT_ROOT / "data" / "raw" / "position_snapshot.csv", position_fields(), payload)
             elif route == "/api/market":
                 append_csv(PROJECT_ROOT / "data" / "raw" / "market_snapshot.csv", market_fields(), payload)
+            elif route == "/api/decision-plan":
+                payload.setdefault("created_at", generated_at())
+                payload.setdefault("date", date.today().isoformat())
+                append_csv(PROJECT_ROOT / "decision_log" / "decision_plans.csv", decision_plan_fields(), payload)
+            elif route == "/api/refresh":
+                refresh_full_report()
+                self.send_json({"ok": True, "message": "已重新生成报告和面板数据"})
+                return
             else:
                 self.send_json({"ok": False, "error": "unknown endpoint"}, status=404)
                 return
@@ -113,6 +122,19 @@ def refresh_dashboard_data() -> None:
     )
 
 
+def refresh_full_report() -> None:
+    scripts_root = PROJECT_ROOT / "scripts"
+    if str(scripts_root) not in sys.path:
+        sys.path.insert(0, str(scripts_root))
+    from generate_report import main as generate_report_main
+
+    generate_report_main()
+
+
+def generated_at() -> str:
+    return datetime.now().isoformat(timespec="seconds")
+
+
 def valuation_fields() -> list[str]:
     return [
         "date",
@@ -147,6 +169,26 @@ def position_fields() -> list[str]:
         "cash_available_usd",
         "source",
         "notes",
+    ]
+
+
+def decision_plan_fields() -> list[str]:
+    return [
+        "created_at",
+        "date",
+        "ticker",
+        "decision_type",
+        "planned_action",
+        "trigger_price",
+        "shares_or_budget",
+        "target_weight_pct",
+        "rr_at_decision",
+        "reason",
+        "confirm_conditions",
+        "risk_controls",
+        "review_date",
+        "review_result",
+        "review_notes",
     ]
 
 

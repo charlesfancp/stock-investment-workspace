@@ -145,6 +145,7 @@ def build_dashboard_data(project_root: Path, as_of: date) -> dict:
             "exit": "Search 护城河受损、Cloud 增速低于危险线、FCF 持续恶化或监管永久削弱商业模式。",
         },
         "decision_log": read_decision_log(project_root / "decision_log" / "decision_log.csv"),
+        "decision_plans": read_decision_plans(project_root / "decision_log" / "decision_plans.csv"),
         "reviews": [
             {"window": "30 天", "focus": "估值快照是否补齐，是否具备 R/R 计算资格。"},
             {"window": "60 天", "focus": "Cloud 增速、margin、backlog 口径变化后的收入可见度。"},
@@ -338,6 +339,14 @@ def load_facts(path: Path) -> list[dict[str, str]]:
                 }
             )
         return facts
+
+
+def read_decision_plans(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    with path.open("r", newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle))
+    return rows[-12:]
 
 
 def io_event_block(facts: list[dict[str, str]]) -> dict:

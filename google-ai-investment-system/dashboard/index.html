@@ -3,239 +3,272 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Alphabet / Google 投资决策面板</title>
+    <title>Alphabet / Google 投资决策台</title>
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="styles.css?v=20260520" />
+    <link rel="stylesheet" href="styles.css?v=20260524" />
   </head>
   <body>
-    <header class="topbar">
-      <div>
-        <p class="eyebrow">Alphabet / Google 投资跟踪</p>
-        <h1>决策面板</h1>
-      </div>
-      <div class="status-strip">
-        <div><span>更新时间</span><strong id="updatedAt">--</strong></div>
-        <div><span>置信度</span><strong id="confidence">--</strong></div>
-        <div><span>交易资格</span><strong id="eligibility">--</strong></div>
-      </div>
-    </header>
-
-    <main>
-      <section class="decision-band">
-        <div>
-          <span class="label">当前判断</span>
-          <h2 id="decision">读取中</h2>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark">G</div>
+          <div>
+            <h1>Google AI</h1>
+            <p>投资决策台</p>
+          </div>
         </div>
-        <div>
-          <span class="label">当前动作</span>
-          <p id="action" class="action">--</p>
+        <nav class="nav-list" aria-label="主导航">
+          <a href="#todayDecision" class="nav-link active">今日判断</a>
+          <a href="#actionDesk" class="nav-link">操作方案</a>
+          <a href="#valuation" class="nav-link">估值</a>
+          <a href="#scenarioMatrix" class="nav-link">情景矩阵</a>
+          <a href="#ioSection" class="nav-link">I/O 反馈</a>
+          <a href="#evidence" class="nav-link">证据</a>
+          <a href="#risk" class="nav-link">反方与退出</a>
+          <a href="#logs" class="nav-link">日志复盘</a>
+        </nav>
+        <div class="discipline">
+          <span>Research only</span>
+          <strong>所有买入、加仓、减仓都需要人工确认。</strong>
         </div>
-      </section>
+      </aside>
 
-      <section>
-        <h2>行情看板</h2>
-        <div id="marketGrid" class="grid four"></div>
-      </section>
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Alphabet Inc. · GOOGL / GOOG</p>
+            <h2>投资决策控制面板</h2>
+          </div>
+          <div class="topbar-actions">
+            <button id="refreshDashboard" class="button primary" type="button">刷新面板</button>
+            <a class="button secondary" href="../reports/latest_report.md" target="_blank" rel="noreferrer">最新报告</a>
+            <a class="button secondary" href="../reports/io_2026_reassessment_2026-05-23.md" target="_blank" rel="noreferrer">I/O 重评估</a>
+          </div>
+        </header>
 
-      <section>
-        <h2>R/R 解锁状态</h2>
-        <div id="rrGateSummary" class="gate-summary"></div>
-        <div id="rrGateGrid" class="grid four"></div>
-      </section>
-
-      <section>
-        <h2>综合评分</h2>
-        <div id="scoreGrid" class="grid four"></div>
-      </section>
-
-      <section>
-        <h2>投资命题</h2>
-        <div id="thesisGrid" class="grid four"></div>
-      </section>
-
-      <section>
-        <h2>Google I/O 2026 事件影响</h2>
-        <div id="ioSummary" class="gate-summary"></div>
-        <div id="ioGrid" class="grid three"></div>
-        <div id="ioWatchlist" class="grid three"></div>
-      </section>
-
-      <section>
-        <h2>投行与共识目标价</h2>
-        <div id="analystSummary" class="gate-summary"></div>
-        <div id="analystGrid" class="grid three"></div>
-      </section>
-
-      <section>
-        <h2>情景概率</h2>
-        <div id="scenarioGrid" class="grid three"></div>
-      </section>
-
-      <section>
-        <h2>估值与仓位</h2>
-        <div id="valuationPanel" class="valuation"></div>
-      </section>
-
-      <section>
-        <h2>价格敏感性</h2>
-        <div id="priceSensitivitySummary" class="gate-summary"></div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>假设股价</th>
-                <th>上行</th>
-                <th>下行</th>
-                <th>R/R</th>
-                <th>动作区间</th>
-                <th>备注</th>
-              </tr>
-            </thead>
-            <tbody id="priceSensitivityRows"></tbody>
-          </table>
-        </div>
-      </section>
-
-      <section>
-        <h2>估值情景矩阵</h2>
-        <div id="valuationScenarioSummary" class="gate-summary"></div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>情景</th>
-                <th>概率</th>
-                <th>目标价</th>
-                <th>下行价</th>
-                <th>买入复核价</th>
-                <th>减仓复盘价</th>
-                <th>当前 R/R</th>
-                <th>当前动作</th>
-              </tr>
-            </thead>
-            <tbody id="valuationScenarioRows"></tbody>
-          </table>
-        </div>
-      </section>
-
-      <section>
-        <h2>手工录入</h2>
-        <div class="forms">
-          <form id="marketForm" class="input-form">
-            <h3>行情快照</h3>
-            <div class="form-grid">
-              <input name="date" placeholder="日期 YYYY-MM-DD" />
-              <input name="ticker" placeholder="Ticker: GOOG / GOOGL" />
-              <input name="share_class" placeholder="股本类别 Class A / Class C" />
-              <input name="current_price" placeholder="当前/收盘价格" />
-              <input name="market_cap_usd_bn" placeholder="市值 USD bn" />
-              <input name="pe_ratio" placeholder="PE" />
-              <input name="price_change_pct" placeholder="涨跌幅 %" />
-              <input name="regular_close_time" placeholder="报价时间/收盘时间" />
-              <input name="pre_market_price" placeholder="盘前价，可空" />
-              <input name="source_name" placeholder="来源名称" />
-              <input name="source_url" placeholder="来源链接" />
-              <input name="captured_at" placeholder="抓取/录入时间" />
+        <section id="todayDecision" class="section-grid decision-grid">
+          <article class="panel decision-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Decision</p>
+                <h3>当前结论</h3>
+              </div>
+              <span id="action" class="status-pill amber">--</span>
             </div>
-            <textarea name="notes" placeholder="备注：报价口径、盘中/收盘、是否官方/非官方价格源"></textarea>
-            <button type="submit">保存行情快照</button>
-          </form>
-
-          <form id="valuationForm" class="input-form">
-            <h3>价格 / 估值快照</h3>
-            <div class="form-grid">
-              <input name="date" placeholder="日期 YYYY-MM-DD" />
-              <input name="ticker" placeholder="Ticker: GOOG / GOOGL" />
-              <input name="current_price" placeholder="当前价格" />
-              <input name="target_price_base" placeholder="基准目标价" />
-              <input name="downside_price" placeholder="风险下行价" />
-              <input name="market_cap_usd_bn" placeholder="市值 USD bn" />
-              <input name="pe_ratio" placeholder="PE" />
-              <input name="fcf_yield_pct" placeholder="FCF yield %" />
-              <input name="source_url" placeholder="来源链接" />
-              <input name="source_date" placeholder="来源/交易日期" />
-              <input name="captured_at" placeholder="抓取/录入日期" />
-              <input name="valuation_methodology" placeholder="估值方法" />
+            <p id="decision" class="decision-text">读取中</p>
+            <div class="chip-row">
+              <span class="chip">更新时间 <strong id="updatedAt">--</strong></span>
+              <span class="chip">置信度 <strong id="confidence">--</strong></span>
+              <span class="chip">交易资格 <strong id="eligibility">--</strong></span>
             </div>
-            <textarea name="notes" placeholder="备注：币种、收盘/盘中、数据限制"></textarea>
-            <button type="submit">保存估值快照</button>
-          </form>
+          </article>
 
-          <form id="positionForm" class="input-form">
-            <h3>仓位快照</h3>
-            <div class="form-grid">
-              <input name="date" placeholder="日期 YYYY-MM-DD" />
-              <input name="ticker" placeholder="Ticker" />
-              <input name="shares" placeholder="持股数" />
-              <input name="avg_cost" placeholder="平均成本" />
-              <input name="current_price" placeholder="当前价格" />
-              <input name="market_value_usd" placeholder="市值 USD" />
-              <input name="unrealized_pnl_pct" placeholder="浮盈/亏 %" />
-              <input name="position_weight_pct" placeholder="仓位占比 %" />
-              <input name="cash_available_usd" placeholder="可用现金 USD" />
-              <input name="source" placeholder="来源/账户口径" />
+          <article class="panel next-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Next Action</p>
+                <h3>下一步动作</h3>
+              </div>
             </div>
-            <textarea name="notes" placeholder="备注：账户、汇率、是否真实持仓"></textarea>
-            <button type="submit">保存仓位快照</button>
-          </form>
-        </div>
-        <p id="saveStatus" class="muted"></p>
-      </section>
+            <div class="action-list">
+              <div><strong>不自动加仓</strong><span>当前 R/R 未达到 1.5。</span></div>
+              <div><strong>等价格或财务验证</strong><span>低于买入复核价，或 Cloud/AI FCF 证据改善。</span></div>
+              <div><strong>记录人工方案</strong><span>下方可输入加仓、减仓、持有和复盘计划。</span></div>
+            </div>
+          </article>
+        </section>
 
-      <section>
-        <h2>缺口清单</h2>
-        <div id="missingInputs" class="grid three"></div>
-      </section>
+        <section class="metric-row">
+          <article class="metric-card"><span>最新价格</span><strong id="heroPrice">--</strong><p id="heroPriceMeta">--</p></article>
+          <article class="metric-card"><span>综合评分</span><strong id="heroScore">--</strong><p>满分 100</p></article>
+          <article class="metric-card"><span>当前 R/R</span><strong id="heroRR">--</strong><p>加仓门槛 1.5</p></article>
+          <article class="metric-card"><span>买入复核价</span><strong id="heroBuyBelow">--</strong><p>低于后仍需人工确认</p></article>
+          <article class="metric-card"><span>减仓复盘价</span><strong id="heroReduceAbove">--</strong><p>高于后复核仓位</p></article>
+        </section>
 
-      <section>
-        <h2>证据区</h2>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>事实</th>
-                <th>数值</th>
-                <th>来源</th>
-                <th>日期</th>
-                <th>核实</th>
-                <th>时效</th>
-              </tr>
-            </thead>
-            <tbody id="evidenceRows"></tbody>
-          </table>
-        </div>
-      </section>
+        <section id="actionDesk" class="section-grid action-desk">
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Action Input</p>
+                <h3>人工确认方案 / 复盘输入</h3>
+              </div>
+              <span id="saveStatus" class="status-pill neutral">待输入</span>
+            </div>
+            <form id="decisionPlanForm" class="decision-form">
+              <div class="form-grid compact">
+                <label>日期<input name="date" type="date" /></label>
+                <label>Ticker<input name="ticker" value="GOOGL" /></label>
+                <label>决策类型<select name="decision_type"><option>持有复盘</option><option>加仓方案</option><option>减仓方案</option><option>退出方案</option></select></label>
+                <label>计划动作<select name="planned_action"><option>持有 / 不加仓</option><option>买入复核</option><option>加仓</option><option>减仓</option><option>退出</option></select></label>
+                <label>触发价格<input name="trigger_price" placeholder="如 372.12 / 397.38" /></label>
+                <label>股数或预算<input name="shares_or_budget" placeholder="如 20 股 / 10000 USD" /></label>
+                <label>目标仓位 %<input name="target_weight_pct" placeholder="如 5" /></label>
+                <label>当时 R/R<input name="rr_at_decision" placeholder="如 0.94" /></label>
+              </div>
+              <label>方案理由<textarea name="reason" placeholder="为什么确认这个方案，绑定证据或价格区间"></textarea></label>
+              <label>确认条件<textarea name="confirm_conditions" placeholder="执行前必须满足的条件，如 Search/Cloud/FCF 未恶化"></textarea></label>
+              <label>风险控制<textarea name="risk_controls" placeholder="止损、撤退条件、仓位上限、重新评估触发"></textarea></label>
+              <div class="form-grid compact">
+                <label>复盘日期<input name="review_date" type="date" /></label>
+                <label>复盘结果<select name="review_result"><option>待复盘</option><option>过程正确</option><option>判断错误</option><option>结果好但过程错误</option><option>需要调整</option></select></label>
+              </div>
+              <label>复盘备注<textarea name="review_notes" placeholder="30/60/90 天后记录验证、推翻或归因"></textarea></label>
+              <button class="button primary full" type="submit">保存人工方案 / 复盘</button>
+            </form>
+          </article>
 
-      <section>
-        <h2>反方与退出</h2>
-        <div id="riskGrid" class="grid three"></div>
-        <div id="triggerGrid" class="grid three triggers"></div>
-      </section>
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Manual Log</p>
+                <h3>人工方案记录</h3>
+              </div>
+            </div>
+            <div id="decisionPlanList" class="records-list"></div>
+          </article>
+        </section>
 
-      <section>
-        <h2>决策日志</h2>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>日期</th>
-                <th>报告期</th>
-                <th>动作</th>
-                <th>评分</th>
-                <th>变化</th>
-              </tr>
-            </thead>
-            <tbody id="logRows"></tbody>
-          </table>
-        </div>
-      </section>
+        <section id="valuation" class="section-grid two-column wide-left">
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Valuation</p>
+                <h3>估值与仓位</h3>
+              </div>
+            </div>
+            <div id="valuationPanel" class="metric-grid"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-header"><div><p class="eyebrow">R/R Gate</p><h3>R/R 解锁状态</h3></div></div>
+            <div id="rrGateSummary" class="summary-box"></div>
+            <div id="rrGateGrid" class="mini-grid"></div>
+          </article>
+        </section>
 
-      <section>
-        <h2>30/60/90 天复盘</h2>
-        <div id="reviewGrid" class="grid three"></div>
-      </section>
-    </main>
+        <section class="section-grid two-column">
+          <article class="panel">
+            <div class="panel-header"><div><p class="eyebrow">Sensitivity</p><h3>价格敏感性</h3></div></div>
+            <div id="priceSensitivitySummary" class="summary-box"></div>
+            <div class="table-wrap"><table><thead><tr><th>股价</th><th>上行</th><th>下行</th><th>R/R</th><th>动作</th></tr></thead><tbody id="priceSensitivityRows"></tbody></table></div>
+          </article>
+          <article id="scenarioMatrix" class="panel">
+            <div class="panel-header"><div><p class="eyebrow">Scenario</p><h3>估值情景矩阵</h3></div></div>
+            <div id="valuationScenarioSummary" class="summary-box"></div>
+            <div class="table-wrap"><table><thead><tr><th>情景</th><th>目标价</th><th>下行价</th><th>买入价</th><th>当前 R/R</th><th>动作</th></tr></thead><tbody id="valuationScenarioRows"></tbody></table></div>
+          </article>
+        </section>
 
-    <script src="app.js?v=20260520"></script>
+        <section class="section-grid two-column">
+          <article class="panel">
+            <div class="panel-header"><div><p class="eyebrow">Score</p><h3>综合评分</h3></div></div>
+            <div id="scoreGrid" class="score-grid"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-header"><div><p class="eyebrow">Thesis</p><h3>投资命题</h3></div></div>
+            <div id="thesisGrid" class="thesis-list"></div>
+          </article>
+        </section>
+
+        <section id="ioSection" class="panel">
+          <div class="panel-header"><div><p class="eyebrow">Google I/O 2026</p><h3>I/O 事件影响与市场反馈</h3></div></div>
+          <div id="ioSummary" class="summary-box"></div>
+          <div id="ioGrid" class="cards-grid"></div>
+          <div id="ioWatchlist" class="watch-grid"></div>
+        </section>
+
+        <section class="section-grid two-column">
+          <article class="panel">
+            <div class="panel-header"><div><p class="eyebrow">Analysts</p><h3>投行与共识目标价</h3></div></div>
+            <div id="analystSummary" class="summary-box"></div>
+            <div id="analystGrid" class="cards-grid"></div>
+          </article>
+          <article id="risk" class="panel">
+            <div class="panel-header"><div><p class="eyebrow">Risk</p><h3>反方与退出</h3></div></div>
+            <div id="riskGrid" class="risk-list"></div>
+            <div id="triggerGrid" class="trigger-list"></div>
+          </article>
+        </section>
+
+        <section id="evidence" class="panel">
+          <div class="panel-header"><div><p class="eyebrow">Evidence</p><h3>证据区</h3></div></div>
+          <div class="table-wrap"><table><thead><tr><th>事实</th><th>数值</th><th>来源</th><th>日期</th><th>核实</th><th>时效</th></tr></thead><tbody id="evidenceRows"></tbody></table></div>
+        </section>
+
+        <section id="logs" class="section-grid two-column">
+          <article class="panel">
+            <div class="panel-header"><div><p class="eyebrow">System Log</p><h3>系统决策日志</h3></div></div>
+            <div class="table-wrap"><table><thead><tr><th>日期</th><th>报告期</th><th>动作</th><th>评分</th><th>变化</th></tr></thead><tbody id="logRows"></tbody></table></div>
+          </article>
+          <article class="panel">
+            <div class="panel-header"><div><p class="eyebrow">Review</p><h3>30/60/90 天复盘</h3></div></div>
+            <div id="reviewGrid" class="review-list"></div>
+            <div id="missingInputs" class="missing-list"></div>
+          </article>
+        </section>
+
+        <details class="panel input-details">
+          <summary>手工数据录入：行情、估值、仓位</summary>
+          <div class="forms">
+            <form id="marketForm" class="input-form">
+              <h3>行情快照</h3>
+              <div class="form-grid">
+                <input name="date" placeholder="日期 YYYY-MM-DD" />
+                <input name="ticker" placeholder="Ticker: GOOG / GOOGL" />
+                <input name="share_class" placeholder="股本类别" />
+                <input name="current_price" placeholder="当前/收盘价格" />
+                <input name="market_cap_usd_bn" placeholder="市值 USD bn" />
+                <input name="pe_ratio" placeholder="PE" />
+                <input name="price_change_pct" placeholder="涨跌幅 %" />
+                <input name="regular_close_time" placeholder="报价时间" />
+                <input name="pre_market_price" placeholder="盘前价" />
+                <input name="source_name" placeholder="来源名称" />
+                <input name="source_url" placeholder="来源链接" />
+                <input name="captured_at" placeholder="抓取/录入时间" />
+              </div>
+              <textarea name="notes" placeholder="备注"></textarea>
+              <button class="button secondary full" type="submit">保存行情快照</button>
+            </form>
+            <form id="valuationForm" class="input-form">
+              <h3>估值快照</h3>
+              <div class="form-grid">
+                <input name="date" placeholder="日期 YYYY-MM-DD" />
+                <input name="ticker" placeholder="Ticker" />
+                <input name="current_price" placeholder="当前价格" />
+                <input name="target_price_base" placeholder="基准目标价" />
+                <input name="downside_price" placeholder="风险下行价" />
+                <input name="market_cap_usd_bn" placeholder="市值 USD bn" />
+                <input name="pe_ratio" placeholder="PE" />
+                <input name="fcf_yield_pct" placeholder="FCF yield %" />
+                <input name="source_url" placeholder="来源链接" />
+                <input name="source_date" placeholder="来源/交易日期" />
+                <input name="captured_at" placeholder="抓取/录入日期" />
+                <input name="valuation_methodology" placeholder="估值方法" />
+              </div>
+              <textarea name="notes" placeholder="备注"></textarea>
+              <button class="button secondary full" type="submit">保存估值快照</button>
+            </form>
+            <form id="positionForm" class="input-form">
+              <h3>仓位快照</h3>
+              <div class="form-grid">
+                <input name="date" placeholder="日期 YYYY-MM-DD" />
+                <input name="ticker" placeholder="Ticker" />
+                <input name="shares" placeholder="持股数" />
+                <input name="avg_cost" placeholder="平均成本" />
+                <input name="current_price" placeholder="当前价格" />
+                <input name="market_value_usd" placeholder="市值 USD" />
+                <input name="unrealized_pnl_pct" placeholder="浮盈/亏 %" />
+                <input name="position_weight_pct" placeholder="仓位占比 %" />
+                <input name="cash_available_usd" placeholder="可用现金 USD" />
+                <input name="source" placeholder="来源/账户口径" />
+              </div>
+              <textarea name="notes" placeholder="备注"></textarea>
+              <button class="button secondary full" type="submit">保存仓位快照</button>
+            </form>
+          </div>
+        </details>
+      </main>
+    </div>
+    <script src="app.js?v=20260524"></script>
   </body>
 </html>

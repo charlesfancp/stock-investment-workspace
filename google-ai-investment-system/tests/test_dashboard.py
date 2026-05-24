@@ -23,6 +23,7 @@ def test_dashboard_data_json_exists_and_is_valid() -> None:
     assert "rr_gate" in data
     assert "price_sensitivity" in data
     assert "valuation_scenarios" in data
+    assert "decision_plans" in data
     assert "io_event" in data
     assert "analysts" in data
     assert "missing_inputs" in data

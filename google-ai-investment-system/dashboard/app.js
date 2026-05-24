@@ -21,6 +21,7 @@ function render(data) {
   text("#eligibility", data.trading_eligible ? "具备复核资格" : "未具备");
   text("#decision", data.decision);
   text("#action", data.action);
+  renderHero(data);
 
   renderMarket(data.market || []);
   renderRRGate(data.rr_gate);
@@ -37,11 +38,46 @@ function render(data) {
   renderEvidence(data.evidence);
   renderRisks(data.risks, data.triggers);
   renderLogs(data.decision_log);
+  renderDecisionPlans(data.decision_plans || []);
   renderReviews(data.reviews);
+}
+
+document.querySelector("#refreshDashboard").addEventListener("click", (event) => {
+  const button = event.currentTarget;
+  button.disabled = true;
+  button.textContent = "刷新中";
+  setSaveStatus("正在重新生成报告和面板", "neutral");
+  fetch("/api/refresh", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" })
+    .then((response) => response.json())
+    .then((result) => {
+      if (!result.ok) throw new Error(result.error || "刷新失败");
+      setSaveStatus("已刷新，正在重新载入", "green");
+      window.location.reload();
+    })
+    .catch((error) => {
+      button.disabled = false;
+      button.textContent = "刷新面板";
+      setSaveStatus(`刷新失败：${error.message}`, "red");
+    });
+});
+
+document.querySelector("#decisionPlanForm").addEventListener("submit", (event) => {
+  event.preventDefault();
+  saveForm("/api/decision-plan", event.currentTarget, false);
+});
+
+function renderHero(data) {
+  text("#heroPrice", money(data.valuation?.current_price));
+  text("#heroPriceMeta", `${data.valuation?.ticker || "GOOGL"} · ${data.valuation?.source_date || missing}`);
+  text("#heroScore", `${data.score?.total ?? missing}`);
+  text("#heroRR", data.valuation?.rr || missing);
+  text("#heroBuyBelow", data.price_sensitivity?.buy_below || missing);
+  text("#heroReduceAbove", data.price_sensitivity?.reduce_review_above || missing);
 }
 
 function renderMarket(items) {
   const grid = document.querySelector("#marketGrid");
+  if (!grid) return;
   grid.innerHTML = "";
   if (!items.length) {
     grid.appendChild(card("行情快照", "数据缺失", "请先录入或更新 market_snapshot.csv"));
@@ -80,17 +116,17 @@ function renderRRGate(gate) {
 
 document.querySelector("#valuationForm").addEventListener("submit", (event) => {
   event.preventDefault();
-  saveForm("/api/valuation", event.currentTarget);
+  saveForm("/api/valuation", event.currentTarget, true);
 });
 
 document.querySelector("#marketForm").addEventListener("submit", (event) => {
   event.preventDefault();
-  saveForm("/api/market", event.currentTarget);
+  saveForm("/api/market", event.currentTarget, true);
 });
 
 document.querySelector("#positionForm").addEventListener("submit", (event) => {
   event.preventDefault();
-  saveForm("/api/position", event.currentTarget);
+  saveForm("/api/position", event.currentTarget, true);
 });
 
 function text(selector, value) {
@@ -163,6 +199,7 @@ function renderAnalysts(analysts) {
 
 function renderScenarios(scenarios) {
   const grid = document.querySelector("#scenarioGrid");
+  if (!grid) return;
   grid.innerHTML = "";
   scenarios.forEach((item) => {
     grid.appendChild(card(item.name, `${item.probability}%`, `目标价：${item.target_price || missing}；触发：${item.trigger}`));
@@ -219,7 +256,7 @@ function renderPriceSensitivity(sensitivity) {
     `可买 ${sensitivity.buy_below}；持有 ${sensitivity.hold_range}；减仓复盘 ${sensitivity.reduce_review_above}`;
   summary.querySelector("p").textContent = `${sensitivity.summary} ${sensitivity.methodology}`;
   (sensitivity.rows || []).forEach((item) => {
-    body.appendChild(row([item.price, item.upside_pct, item.downside_pct, item.rr, item.decision, item.note]));
+    body.appendChild(row([item.price, item.upside_pct, item.downside_pct, item.rr, item.decision]));
   });
 }
 
@@ -241,11 +278,9 @@ function renderValuationScenarios(matrix) {
     body.appendChild(
       row([
         item.label,
-        item.probability,
         item.target_price,
         item.downside_price,
         item.buy_below,
-        item.reduce_review_above,
         item.current_rr,
         item.current_decision,
       ])
@@ -292,6 +327,36 @@ function renderLogs(logs) {
   logs.forEach((item) => body.appendChild(row([item.date, item.period, item.action, item.score, item.change_reason || ""])));
 }
 
+function renderDecisionPlans(plans) {
+  const list = document.querySelector("#decisionPlanList");
+  list.innerHTML = "";
+  if (!plans.length) {
+    list.appendChild(recordCard({
+      planned_action: "暂无人工方案",
+      decision_type: "等待输入",
+      date: "",
+      reason: "在左侧输入加仓、减仓、持有或复盘方案后，会显示在这里。",
+    }));
+    return;
+  }
+  plans.slice().reverse().forEach((item) => list.appendChild(recordCard(item)));
+}
+
+function recordCard(item) {
+  const el = document.createElement("div");
+  el.className = "record-card";
+  const title = `${item.planned_action || missing} · ${item.decision_type || missing}`;
+  const meta = [item.date, item.ticker, item.trigger_price ? `触发价 ${item.trigger_price}` : "", item.rr_at_decision ? `R/R ${item.rr_at_decision}` : ""]
+    .filter(Boolean)
+    .join(" · ");
+  el.innerHTML = `<strong></strong><p class="meta"></p><p class="reason"></p><p class="review"></p>`;
+  el.querySelector("strong").textContent = title;
+  el.querySelector(".meta").textContent = meta || "数据缺失";
+  el.querySelector(".reason").textContent = item.reason || "未填写理由";
+  el.querySelector(".review").textContent = `复盘：${item.review_result || "待复盘"}；${item.review_notes || item.review_date || ""}`;
+  return el;
+}
+
 function renderReviews(reviews) {
   const grid = document.querySelector("#reviewGrid");
   grid.innerHTML = "";
@@ -318,8 +383,9 @@ function row(values) {
   return tr;
 }
 
-function saveForm(endpoint, form) {
+function saveForm(endpoint, form, reload = true) {
   const payload = Object.fromEntries(new FormData(form).entries());
+  setSaveStatus("正在保存", "neutral");
   fetch(endpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -328,10 +394,26 @@ function saveForm(endpoint, form) {
     .then((response) => response.json())
     .then((result) => {
       if (!result.ok) throw new Error(result.error || "保存失败");
-      document.querySelector("#saveStatus").textContent = "已保存，正在刷新面板数据。";
-      window.location.reload();
+      setSaveStatus("已保存", "green");
+      if (reload) {
+        window.location.reload();
+      } else {
+        form.reset();
+        window.location.reload();
+      }
     })
     .catch((error) => {
-      document.querySelector("#saveStatus").textContent = `保存失败：${error.message}`;
+      setSaveStatus(`保存失败：${error.message}`, "red");
     });
+}
+
+function setSaveStatus(message, tone) {
+  const el = document.querySelector("#saveStatus");
+  el.textContent = message;
+  el.className = `status-pill ${tone || "neutral"}`;
+}
+
+function money(value) {
+  if (!value || value === missing) return missing;
+  return String(value).startsWith("$") ? value : `$${value}`;
 }
